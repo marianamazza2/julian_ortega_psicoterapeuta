@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brand Book · Web Psicólogo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Hanken+Grotesk:ital,wght@0,300..800;1,400..600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F8F5F0; --bg-alt:#EFEAE1; --border:#E3DDD2;
+    --ink:#243531; --ink-soft:#5E6B66;
+    --teal:#1F5C56; --teal-strong:#16433F; --teal-cta:#2E7A71; --teal-cta-strong:#256158;
+    --coral:#EC9A78; --coral-tint:#FBE6DB; --coral-soft:#F2B49B;
+    --amber:#EBC56B; --amber-tint:#F8EECB;
+    --sage:#9FBE93;  --sage-tint:#E4EEDF;
+    --sky:#8FB8CE;   --sky-tint:#DEEBF1;
+    --lilac:#B8A6C9; --lilac-tint:#ECE5F1;
+    --radius-sm:8px; --radius:14px; --radius-lg:22px;
+    --maxw:980px;
+    --serif:"Fraunces",Georgia,serif;
+    --sans:"Hanken Grotesk",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.7;font-weight:380;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:430;line-height:1.12;letter-spacing:-.01em;color:var(--teal)}
+  h2{font-size:clamp(1.9rem,4vw,2.7rem);margin-bottom:.4em}
+  h3{font-size:1.35rem;color:var(--ink);margin-bottom:.4em}
+  h4{font-size:1.05rem;color:var(--ink);font-family:var(--sans);font-weight:680;letter-spacing:0}
+  p{margin-bottom:1rem;max-width:60ch}
+  p.lead{font-size:1.18rem;color:var(--ink-soft)}
+  a{color:var(--teal-cta-strong)}
+  .eyebrow{font-family:var(--sans);font-weight:680;font-size:.78rem;text-transform:uppercase;letter-spacing:.18em;color:var(--coral);margin-bottom:.9rem;display:block}
+
+  header.hero{padding:120px 0 90px;border-bottom:1px solid var(--border);
+    background:
+      radial-gradient(60% 70% at 88% -5%, var(--sky-tint) 0%, transparent 55%),
+      radial-gradient(55% 60% at 3% 0%, var(--coral-tint) 0%, transparent 50%),
+      radial-gradient(50% 50% at 45% 110%, var(--amber-tint) 0%, transparent 60%),
+      var(--bg);}
+  .hero .kick{font-family:var(--sans);font-weight:680;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);opacity:.7}
+  .hero h1{font-family:var(--serif);font-size:clamp(2.8rem,7vw,5rem);font-weight:400;line-height:1.02;letter-spacing:-.02em;color:var(--ink);margin:.3em 0 .35em}
+  .hero h1 em{font-style:italic;color:var(--teal)}
+  .hero p{font-size:1.25rem;color:var(--ink-soft);max-width:54ch}
+  .meta{margin-top:36px;display:flex;gap:28px;flex-wrap:wrap;font-size:.9rem;color:var(--ink-soft)}
+  .meta b{color:var(--ink);font-weight:680}
+
+  section{padding:78px 0;border-bottom:1px solid var(--border)}
+  .sec-head{max-width:62ch;margin-bottom:42px}
+
+  .swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px}
+  .sw{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:#fff}
+  .sw .chip{height:84px;position:relative}
+  .sw .chip .tint{position:absolute;right:0;top:0;width:38%;height:100%}
+  .sw .info{padding:12px 14px}
+  .sw .name{font-weight:680;font-size:.92rem}
+  .sw .hex{font-size:.8rem;color:var(--ink-soft);letter-spacing:.03em;text-transform:uppercase}
+  .sw .role{font-size:.78rem;color:var(--ink-soft);margin-top:4px;line-height:1.4}
+  .row-label{font-weight:680;margin:34px 0 14px;font-size:.95rem}
+
+  .swatch-line{display:flex;border-radius:12px;overflow:hidden;border:1px solid var(--border);margin:12px 0 8px}
+  .swatch-line div{flex:1;height:56px}
+
+  .ratio{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:24px}
+  .pair{border-radius:var(--radius);padding:22px;font-weight:600}
+  .pair small{display:block;font-weight:600;opacity:.85;font-size:.78rem;margin-top:6px}
+
+  .specimen{border:1px solid var(--border);background:#fff;border-radius:var(--radius-lg);padding:34px;margin-bottom:22px}
+  .specimen .label{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--coral);font-weight:680;margin-bottom:18px}
+  .glyphs{font-size:2.6rem;line-height:1.1;color:var(--ink);margin-bottom:10px}
+  .scale-row{display:flex;align-items:baseline;gap:18px;padding:14px 0;border-top:1px dashed var(--border);flex-wrap:wrap}
+  .scale-row:first-of-type{border-top:none}
+  .scale-row .tag{font-family:var(--sans);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);min-width:128px;font-weight:680}
+  .ff-serif{font-family:var(--serif)} .ff-sans{font-family:var(--sans)}
+
+  .btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--sans);font-weight:680;font-size:.98rem;padding:15px 30px;border-radius:999px;border:none;cursor:pointer;text-decoration:none;transition:transform .15s ease}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-primary{background:var(--teal-cta);color:#fff;box-shadow:0 8px 22px -10px rgba(31,92,86,.6)}
+  .btn-primary:hover{background:var(--teal-cta-strong)}
+  .btn-accent{background:var(--coral-soft);color:var(--ink)}
+  .btn-ghost{background:transparent;color:var(--teal);border:1.5px solid var(--teal)}
+  .btn-ghost:hover{background:var(--teal);color:#fff}
+  .btn-row{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin:8px 0 18px}
+
+  .card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:30px;max-width:340px;box-shadow:0 18px 40px -28px rgba(36,53,49,.4)}
+  .card .ic{width:46px;height:46px;border-radius:12px;background:var(--sage-tint);display:grid;place-items:center;color:var(--teal);margin-bottom:18px}
+  .badge{display:inline-flex;align-items:center;gap:8px;background:var(--sage-tint);color:var(--teal-strong);font-weight:680;font-size:.8rem;letter-spacing:.04em;padding:7px 14px;border-radius:999px}
+  .badge.coral{background:var(--coral-tint);color:#9C4A2C}
+
+  .areas{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-top:6px}
+  .area{border-radius:var(--radius-lg);padding:22px;border:1px solid var(--border)}
+  .area .dot{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;margin-bottom:12px;color:var(--teal-strong)}
+  .area h4{font-family:var(--serif);font-size:1.15rem;color:var(--teal-strong);margin-bottom:5px;font-weight:460}
+  .area p{font-size:.88rem;color:var(--ink-soft);margin:0}
+  .tags{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+  .tag{font-weight:680;font-size:.82rem;padding:7px 15px;border-radius:999px}
+
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+  @media(max-width:720px){.cols{grid-template-columns:1fr}}
+
+  .do-dont{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:24px}
+  @media(max-width:720px){.do-dont{grid-template-columns:1fr}}
+  .box{border-radius:var(--radius);padding:22px;border:1px solid var(--border)}
+  .box.do{background:var(--sage-tint);border-color:transparent}
+  .box.dont{background:#fff}
+  .box h4{margin-bottom:12px}
+  .box ul{list-style:none}
+  .box li{padding:6px 0 6px 26px;position:relative;font-size:.95rem;color:var(--ink)}
+  .box.do li::before{content:"✓";position:absolute;left:0;color:var(--teal);font-weight:800}
+  .box.dont li::before{content:"✕";position:absolute;left:0;color:#9C4A2C;font-weight:800}
+
+  .quote{font-family:var(--serif);font-style:italic;font-size:1.5rem;color:var(--teal);line-height:1.4;border-left:3px solid var(--coral);padding-left:24px;margin:10px 0 24px;max-width:40ch}
+
+  /* sitemap / secciones */
+  .flow{display:flex;flex-direction:column;gap:14px}
+  .step{display:grid;grid-template-columns:54px 1fr;gap:18px;align-items:start;background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px 24px}
+  .step .num{font-family:var(--serif);font-size:1.5rem;color:var(--teal);width:54px;height:54px;border-radius:14px;display:grid;place-items:center}
+  .step h4{font-family:var(--serif);font-weight:460;color:var(--teal-strong);font-size:1.2rem;margin-bottom:4px}
+  .step p{margin:0;font-size:.94rem;color:var(--ink-soft);max-width:62ch}
+  .step .chiprow{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .mini{font-size:.72rem;font-weight:680;letter-spacing:.04em;padding:4px 11px;border-radius:999px;color:var(--teal-strong)}
+  .cta-mini{font-size:.74rem;font-weight:680;color:var(--coral);background:var(--coral-tint);padding:4px 11px;border-radius:999px;color:#9C4A2C}
+
+  .tokenbox{background:var(--teal);color:#dcebe8;border-radius:var(--radius-lg);padding:30px 32px;font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.84rem;line-height:1.8;overflow-x:auto}
+  .tokenbox .c{color:var(--coral)} .tokenbox .k{color:#9fc6bf}
+
+  footer{padding:60px 0 80px;text-align:center;color:var(--ink-soft);font-size:.9rem}
+  .tag-line{font-family:var(--serif);font-style:italic;font-size:1.2rem;color:var(--teal);margin-bottom:10px}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="kick">Brand Book · v2</span>
+    <h1>Un espacio <em>sereno</em><br>para sentirse mejor</h1>
+    <p>Sistema de identidad visual y verbal para la web de consulta psicológica. Calma, cercanía y profesionalidad — colorida pero en calma, fresca sin ser frívola.</p>
+    <div class="meta">
+      <div><b>Concepto</b><br>Calma fresca</div>
+      <div><b>Tipografías</b><br>Fraunces · Hanken Grotesk</div>
+      <div><b>Color</b><br>Teal + 5 acentos armónicos</div>
+    </div>
+  </div>
+</header>
+
+<!-- 01 ESENCIA -->
+<section style="background:var(--bg)">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">01 · Esencia</span>
+      <h2>La idea detrás de la marca</h2>
+      <p class="lead">La web debe transmitir lo mismo que una buena primera sesión: un lugar seguro, sin juicios, donde se respira aire limpio y, a la vez, sientes que estás en manos de un profesional.</p>
+    </div>
+    <div class="cols">
+      <div>
+        <h3>Personalidad</h3>
+        <p>Cálida, honesta y clara. Habla de tú, sin tecnicismos innecesarios. Acompaña, no impone. Transmite esperanza realista, nunca promesas vacías.</p>
+        <div class="tags" style="margin-top:16px">
+          <span class="badge">Cercana</span><span class="badge coral">Fresca</span>
+          <span class="badge">Profesional</span><span class="badge coral">Inclusiva</span><span class="badge">Serena</span>
+        </div>
+      </div>
+      <div>
+        <h3>Cómo se siente vs. cómo NO</h3>
+        <div class="do-dont" style="margin-top:8px">
+          <div class="box do"><h4>Sí</h4><ul><li>Aire, espacio, calma</li><li>Humano y honesto</li><li>Editorial y cuidado</li></ul></div>
+          <div class="box dont"><h4>No</h4><ul><li>Clínico-frío de hospital</li><li>Corporativo genérico</li><li>Espiritual / místico</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 COLOR -->
+<section style="background:var(--bg-alt)">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">02 · Color</span>
+      <h2>Paleta cromática</h2>
+      <p class="lead">Una base neutra cálida, un teal profundo que da confianza, y cinco acentos vivos que comparten el mismo registro (saturación y luminosidad parejas) para que convivan en armonía. Reparto 65 % neutros + teal · 35 % acentos.</p>
+    </div>
+
+    <h3>El principio: misma "temperatura"</h3>
+    <div class="swatch-line">
+      <div style="background:#EC9A78"></div><div style="background:#EBC56B"></div><div style="background:#9FBE93"></div><div style="background:#8FB8CE"></div><div style="background:#B8A6C9"></div>
+    </div>
+    <p style="font-size:.92rem;color:var(--ink-soft)">Coral, ámbar, salvia, cielo y lila — cinco tonos distintos, misma energía suave. Cada uno tiene además una versión "velo" muy clara para fondos.</p>
+
+    <div class="row-label">Neutros y ancla (estructura · 65 %)</div>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#F8F5F0"></div><div class="info"><div class="name">Lino</div><div class="hex">#F8F5F0</div><div class="role">Fondo base</div></div></div>
+      <div class="sw"><div class="chip" style="background:#243531"></div><div class="info"><div class="name">Tinta</div><div class="hex">#243531</div><div class="role">Texto principal</div></div></div>
+      <div class="sw"><div class="chip" style="background:#1F5C56"></div><div class="info"><div class="name">Teal ancla</div><div class="hex">#1F5C56</div><div class="role">Titulares, texto</div></div></div>
+      <div class="sw"><div class="chip" style="background:#2E7A71"></div><div class="info"><div class="name">Teal eucalipto</div><div class="hex">#2E7A71</div><div class="role">Botón principal</div></div></div>
+    </div>
+
+    <div class="row-label">Acentos vivos (la alegría · 35 %)</div>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#EC9A78"><div class="tint" style="background:#FBE6DB"></div></div><div class="info"><div class="name">Coral</div><div class="hex">#EC9A78 · #FBE6DB</div><div class="role">Calidez · CTA secundario</div></div></div>
+      <div class="sw"><div class="chip" style="background:#EBC56B"><div class="tint" style="background:#F8EECB"></div></div><div class="info"><div class="name">Ámbar</div><div class="hex">#EBC56B · #F8EECB</div><div class="role">Optimismo · destacados</div></div></div>
+      <div class="sw"><div class="chip" style="background:#9FBE93"><div class="tint" style="background:#E4EEDF"></div></div><div class="info"><div class="name">Salvia</div><div class="hex">#9FBE93 · #E4EEDF</div><div class="role">Crecimiento · calma</div></div></div>
+      <div class="sw"><div class="chip" style="background:#8FB8CE"><div class="tint" style="background:#DEEBF1"></div></div><div class="info"><div class="name">Cielo</div><div class="hex">#8FB8CE · #DEEBF1</div><div class="role">Confianza</div></div></div>
+      <div class="sw"><div class="chip" style="background:#B8A6C9"><div class="tint" style="background:#ECE5F1"></div></div><div class="info"><div class="name">Lila</div><div class="hex">#B8A6C9 · #ECE5F1</div><div class="role">Duelo, reseñas, íntimo</div></div></div>
+    </div>
+
+    <h3 style="margin:40px 0 6px">Contraste y accesibilidad (WCAG AA)</h3>
+    <div class="ratio">
+      <div class="pair" style="background:#2E7A71;color:#fff">Blanco sobre teal eucalipto<small>≈ 5:1 · AA ✓ (botón principal)</small></div>
+      <div class="pair" style="background:#F8F5F0;color:#243531">Tinta sobre lino<small>≈ 12:1 · AAA ✓</small></div>
+      <div class="pair" style="background:#F8F5F0;color:#1F5C56">Teal sobre lino (titulares)<small>≈ 6.5:1 · AA ✓</small></div>
+      <div class="pair" style="background:#F2B49B;color:#243531">Tinta sobre coral suave<small>≈ 6:1 · AA ✓ (botón)</small></div>
+    </div>
+    <p style="margin-top:16px;font-size:.93rem;color:var(--ink-soft)"><b>Reglas:</b> los acentos nunca llevan texto blanco; encima de ellos siempre va tinta. Los párrafos largos van siempre en tinta sobre lino — el color vive en fondos, iconos y detalles. Máximo 2 acentos grandes por pantalla.</p>
+  </div>
+</section>
+
+<!-- 03 TIPOGRAFÍA -->
+<section style="background:var(--bg)">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">03 · Tipografía</span>
+      <h2>Dos voces que se complementan</h2>
+      <p class="lead">Una serif contemporánea y suave para titulares (la voz cálida y humana) y una grotesque limpia para el cuerpo (la voz clara y legible). Distintas a propósito.</p>
+    </div>
+
+    <div class="specimen">
+      <div class="label">Titulares · Fraunces</div>
+      <div class="glyphs ff-serif">Aa Bb Cc · Gg Qq Rr</div>
+      <p class="ff-serif" style="font-size:1.05rem;color:var(--ink-soft);margin-bottom:24px">Serif "soft" de contraste suave y formas orgánicas. Aporta el aire editorial, cálido y atemporal. Pesos 300–500; cursiva para matices emocionales.</p>
+      <div class="scale-row"><span class="tag">Display / H1</span><span class="ff-serif" style="font-size:3rem;font-weight:400;color:var(--ink);line-height:1">Escucho lo que sientes</span></div>
+      <div class="scale-row"><span class="tag">H2</span><span class="ff-serif" style="font-size:2.1rem;font-weight:430;color:var(--teal)">Cada proceso es único</span></div>
+      <div class="scale-row"><span class="tag">H3 · cursiva</span><span class="ff-serif" style="font-size:1.5rem;font-style:italic;font-weight:400;color:var(--teal)">un espacio sin juicios</span></div>
+    </div>
+
+    <div class="specimen">
+      <div class="label">Cuerpo &amp; UI · Hanken Grotesk</div>
+      <div class="glyphs ff-sans">Aa Bb Cc · Gg Qq Rr</div>
+      <p class="ff-sans" style="font-size:1.05rem;color:var(--ink-soft);margin-bottom:24px">Grotesque humanista, amable y muy legible en pantalla. Para párrafos, botones, menús y etiquetas. Pesos 380 (cuerpo), 600 (destacados) y 680 (botones / eyebrows).</p>
+      <div class="scale-row"><span class="tag">Lead</span><span class="ff-sans" style="font-size:1.2rem;color:var(--ink-soft)">Te acompaño en sesiones presenciales y online.</span></div>
+      <div class="scale-row"><span class="tag">Body</span><span class="ff-sans" style="font-size:1rem;color:var(--ink)">Trabajamos juntos en lo que te trae a terapia, a tu ritmo.</span></div>
+      <div class="scale-row"><span class="tag">Eyebrow</span><span class="ff-sans" style="font-size:.8rem;font-weight:680;letter-spacing:.18em;text-transform:uppercase;color:var(--coral)">Cómo trabajo</span></div>
+    </div>
+
+    <div class="cols" style="margin-top:8px">
+      <div><h4>Escala modular (ratio 1.25)</h4><p style="font-size:.95rem;color:var(--ink-soft)">Display 64 / H1 48 / H2 36 / H3 24 / Lead 20 / Body 17 / Small 14 / Caption 12 px. Títulos en <b>clamp()</b>. Interlineado 1.1 en títulos, 1.7 en cuerpo. Medida ideal: 60–65 caracteres.</p></div>
+      <div><h4>Alternativa válida</h4><p style="font-size:.95rem;color:var(--ink-soft)">Si Fraunces resulta muy marcada: <b>Newsreader</b> (títulos) + <b>Figtree</b> (cuerpo). Mantener siempre: <b>serif para títulos, sans para cuerpo</b>.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 COMPONENTES -->
+<section style="background:var(--bg-alt)">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">04 · Componentes</span>
+      <h2>Piezas del sistema</h2>
+      <p class="lead">Esquinas suaves (8–22 px), sombras muy difusas de tinte cálido, mucho aire. Cada tarjeta o sección adopta un acento; los neutros lo cohesionan todo.</p>
+    </div>
+
+    <h4>Botones</h4>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="#">Reservar primera sesión →</a>
+      <a class="btn btn-accent" href="#">Escríbeme</a>
+      <a class="btn btn-ghost" href="#">Conóceme</a>
+    </div>
+    <p style="font-size:.92rem;color:var(--ink-soft);margin-bottom:36px">Principal en teal eucalipto (acción central). Secundario en coral suave. Fantasma para acciones terciarias. Siempre en pastilla, peso 680.</p>
+
+    <h4>Áreas de trabajo — un color por tarjeta</h4>
+    <div class="areas">
+      <div class="area" style="background:var(--coral-tint)"><div class="dot" style="background:var(--coral)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-7-4.5-9.5-9A5.2 5.2 0 0 1 12 6a5.2 5.2 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9Z"/></svg></div><h4>Ansiedad</h4><p>Recupera la calma, paso a paso.</p></div>
+      <div class="area" style="background:var(--sage-tint)"><div class="dot" style="background:var(--sage)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 22c5-3 7-7 7-11a7 7 0 0 0-14 0c0 4 2 8 7 11ZM12 6v8"/></svg></div><h4>Ánimo</h4><p>Vuelve a conectar contigo.</p></div>
+      <div class="area" style="background:var(--sky-tint)"><div class="dot" style="background:var(--sky)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M17 21v-2a4 4 0 0 0-8 0v2M13 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg></div><h4>Relaciones</h4><p>Vínculos más sanos.</p></div>
+      <div class="area" style="background:var(--amber-tint)"><div class="dot" style="background:var(--amber)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3v2M12 19v2M5 12H3M21 12h-2M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"/></svg></div><h4>Autoestima</h4><p>Más amable contigo.</p></div>
+      <div class="area" style="background:var(--lilac-tint)"><div class="dot" style="background:var(--lilac)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 21c0-8 6-13 14-13 0 8-6 13-14 13Z"/><path d="M5 21c3-5 6-7 10-9"/></svg></div><h4>Duelo</h4><p>A través de lo que dolió.</p></div>
+    </div>
+
+    <h4 style="margin-top:34px">Etiquetas y sellos de confianza</h4>
+    <div class="tags">
+      <span class="tag" style="background:var(--coral-tint);color:#9C4A2C">Ansiedad</span>
+      <span class="tag" style="background:var(--sage-tint);color:#4C6B43">Mindfulness</span>
+      <span class="tag" style="background:var(--sky-tint);color:#3C6580">Pareja</span>
+      <span class="tag" style="background:var(--amber-tint);color:#8A6A1E">Autocuidado</span>
+      <span class="tag" style="background:var(--lilac-tint);color:#6B5582">Duelo</span>
+    </div>
+    <div class="tags" style="margin-top:14px">
+      <span class="badge">Colegiado nº 00000</span><span class="badge coral">Online &amp; presencial</span><span class="badge">1ª sesión orientativa</span>
+    </div>
+
+    <div class="do-dont" style="margin-top:36px">
+      <div class="box do"><h4>Estilo de imagen / ilustración</h4><ul><li>Iconos de línea, trazo 1.4–1.6, redondeados</li><li>Ilustración suave en los tonos de la paleta</li><li>Foto: luz natural, tonos cálidos, espacios reales</li></ul></div>
+      <div class="box dont"><h4>Evitar</h4><ul><li>Stock de "manos sosteniendo cerebros"</li><li>Iconos rellenos multicolor o emojis</li><li>Fotos azuladas, frías o de banco evidente</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 VOZ -->
+<section style="background:var(--bg)">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">05 · Voz y tono</span><h2>Cómo hablamos</h2></div>
+    <div class="cols">
+      <div>
+        <p class="quote">"Te ofrezco un espacio sin juicios para trabajar en lo que te trae aquí, a tu ritmo."</p>
+        <p style="font-size:.95rem;color:var(--ink-soft)">Primera persona, tuteo, frases cortas. Verbos de acompañamiento ("acompaño", "trabajamos", "exploramos"). Esperanza realista, nunca promesas de cura. Lenguaje inclusivo.</p>
+      </div>
+      <div>
+        <div class="box do" style="margin-bottom:16px"><h4>Sí decimos</h4><ul><li>"Estoy aquí para acompañarte"</li><li>"A tu ritmo, sin prisa"</li><li>"Un espacio seguro y sin juicios"</li></ul></div>
+        <div class="box dont"><h4>No decimos</h4><ul><li>"Soluciona tu vida en 5 sesiones"</li><li>"Supera la depresión definitivamente"</li><li>Jerga clínica sin explicar</li></ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 ESTRUCTURA -->
+<section style="background:var(--bg-alt)">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">06 · Estructura</span>
+      <h2>Las secciones de la home</h2>
+      <p class="lead">La home se lee como una historia de arriba a abajo: del primer "te entiendo" a la confianza, y de ahí a dar el paso. Cada bloque tiene una sola idea, adopta un acento y termina invitando a contactar.</p>
+    </div>
+    <div class="flow">
+      <div class="step"><div class="num" style="background:var(--bg-alt)">0</div><div><h4>Navbar</h4><p>Logo, menú simple (Inicio · Sobre mí · Servicios · Blog · Contacto) y un botón de reserva siempre visible. Fija al hacer scroll.</p><div class="chiprow"><span class="cta-mini">Reservar</span></div></div></div>
+      <div class="step"><div class="num" style="background:var(--bg)">1</div><div><h4>Hero</h4><p>Claim emocional en Fraunces + subtítulo cálido + CTA principal. Fondo neutro con una leve mezcla de velos de color. Es la primera impresión: debe dar calma y seguridad en 3 segundos.</p><div class="chiprow"><span class="mini" style="background:var(--bg-alt)">neutro + velos</span><span class="cta-mini">Reservar 1ª sesión</span></div></div></div>
+      <div class="step"><div class="num" style="background:var(--bg)">2</div><div><h4>Sellos de confianza</h4><p>Franja breve con nº de colegiado, "online y presencial" y "primera sesión orientativa". Da credibilidad inmediata, sin ocupar espacio.</p></div></div>
+      <div class="step"><div class="num" style="background:var(--sage-tint)">3</div><div><h4>Quién soy (intro)</h4><p>Foto cálida + dos párrafos en primera persona: quién eres y desde dónde acompañas. Tono humano, nada de currículum aún.</p><div class="chiprow"><span class="mini" style="background:var(--sage-tint)">velo salvia</span><span class="cta-mini">Conóceme</span></div></div></div>
+      <div class="step"><div class="num" style="background:var(--bg)">4</div><div><h4>Cómo trabajo</h4><p>Tu enfoque explicado en una idea clara y sin jerga: qué puede esperar la persona de una sesión contigo.</p></div></div>
+      <div class="step"><div class="num" style="background:var(--bg)">5</div><div><h4>En qué te ayudo</h4><p>Grid de tarjetas de áreas (ansiedad, ánimo, relaciones, autoestima, duelo…), cada una con su acento e icono. Aquí es donde la paleta cobra vida.</p><div class="chiprow"><span class="mini" style="background:var(--coral-tint);color:#9C4A2C">multi-acento</span></div></div></div>
+      <div class="step"><div class="num" style="background:var(--bg)">6</div><div><h4>Objetivos del proceso</h4><p>Tres pasos sencillos (p. ej. entender → trabajar → sostener) que muestran que hay un camino, sin prometer resultados mágicos.</p></div></div>
+      <div class="step"><div class="num" style="background:var(--sky-tint)">7</div><div><h4>Modalidad online y presencial</h4><p>Cómo y dónde son las sesiones, formato y duración. Resuelve la duda práctica antes de contactar.</p><div class="chiprow"><span class="mini" style="background:var(--sky-tint);color:#3C6580">velo cielo</span><span class="cta-mini">Agendar visita</span></div></div></div>
+      <div class="step"><div class="num" style="background:var(--lilac-tint)">8</div><div><h4>Reseñas</h4><p>Testimonios reales (anonimizados) + enlace a Google. La prueba social que convierte la confianza en decisión.</p><div class="chiprow"><span class="mini" style="background:var(--lilac-tint);color:#6B5582">velo lila</span></div></div></div>
+      <div class="step"><div class="num" style="background:var(--bg)">9</div><div><h4>Blog / Instagram</h4><p>Últimos artículos o publicaciones. Aporta SEO, cercanía y un motivo para volver. Las categorías usan las etiquetas de color.</p></div></div>
+      <div class="step"><div class="num" style="background:var(--coral-tint)">10</div><div><h4>CTA final + Footer</h4><p>Cierre cálido que repite la invitación, y pie con datos de contacto, redes y enlaces legales (privacidad, cookies, aviso legal).</p><div class="chiprow"><span class="mini" style="background:var(--coral-tint);color:#9C4A2C">velo coral</span><span class="cta-mini">Escríbeme</span></div></div></div>
+    </div>
+    <p style="margin-top:24px;font-size:.93rem;color:var(--ink-soft)">Páginas internas: <b>Sobre mí</b> (historia, formación, colegiación), <b>Servicios</b> (áreas en detalle, metodología, FAQ), <b>Contacto</b> (formulario + agenda + mapa + WhatsApp) y <b>Blog</b> (listado + artículo).</p>
+  </div>
+</section>
+
+<!-- 07 TOKENS -->
+<section style="background:var(--bg)">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">07 · Hand-off</span><h2>Design tokens</h2><p class="lead">Punto de partida para CSS o <code>tailwind.config</code>. El detalle paso a paso está en el brief de implementación (.md).</p></div>
+    <div class="tokenbox">
+<span class="k">:root</span> {<br>
+&nbsp;&nbsp;<span class="c">--bg</span>:#F8F5F0; <span class="c">--bg-alt</span>:#EFEAE1; <span class="c">--border</span>:#E3DDD2;<br>
+&nbsp;&nbsp;<span class="c">--ink</span>:#243531; <span class="c">--ink-soft</span>:#5E6B66;<br>
+&nbsp;&nbsp;<span class="c">--teal</span>:#1F5C56; <span class="c">--teal-strong</span>:#16433F; <span class="c">--teal-cta</span>:#2E7A71;<br>
+&nbsp;&nbsp;<span class="c">--coral</span>:#EC9A78; <span class="c">--coral-tint</span>:#FBE6DB; <span class="c">--coral-soft</span>:#F2B49B;<br>
+&nbsp;&nbsp;<span class="c">--amber</span>:#EBC56B; <span class="c">--amber-tint</span>:#F8EECB;<br>
+&nbsp;&nbsp;<span class="c">--sage</span>:#9FBE93; <span class="c">--sage-tint</span>:#E4EEDF;<br>
+&nbsp;&nbsp;<span class="c">--sky</span>:#8FB8CE; <span class="c">--sky-tint</span>:#DEEBF1;<br>
+&nbsp;&nbsp;<span class="c">--lilac</span>:#B8A6C9; <span class="c">--lilac-tint</span>:#ECE5F1;<br>
+&nbsp;&nbsp;<span class="c">--serif</span>:"Fraunces",serif; <span class="c">--sans</span>:"Hanken Grotesk",sans-serif;<br>
+&nbsp;&nbsp;<span class="c">--radius-sm</span>:8px; <span class="c">--radius</span>:14px; <span class="c">--radius-lg</span>:22px;<br>
+}
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="tag-line">Calma fresca</div>
+    <p>Brand Book v2 · Web de consulta psicológica · MAZZMKT</p>
+  </div>
+</footer>
+
+</body>
+</html>
