@@ -5,7 +5,6 @@ const links = [
   { label: 'Inicio', href: '#' },
   { label: 'Sobre mí', href: '#sobre-mi' },
   { label: 'Servicios', href: '#servicios' },
-  { label: 'Blog', href: '#blog' },
   { label: 'Contacto', href: '#contacto' },
 ]
 
@@ -18,6 +17,11 @@ export function Navbar() {
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [menuOpen])
 
   return (
     <header
@@ -56,17 +60,7 @@ export function Navbar() {
               whiteSpace: 'nowrap',
             }}
           >
-            Julián Ortega
-            <span style={{
-              fontFamily: 'var(--sans)',
-              fontSize: '.67rem',
-              fontWeight: 680,
-              letterSpacing: '.12em',
-              textTransform: 'uppercase',
-              color: 'var(--ink-soft)',
-            }}>
-              Psicólogo · COPC 35627
-            </span>
+            Dr. Julián Ortega
           </a>
 
           {/* Desktop nav */}
@@ -149,11 +143,24 @@ export function Navbar() {
                 cursor: 'pointer',
                 padding: 6,
               }}
-              aria-label="Abrir menú"
+              aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
+              aria-expanded={menuOpen}
             >
-              <span style={{ display: 'block', width: 22, height: 2, background: 'var(--ink)', borderRadius: 2 }} />
-              <span style={{ display: 'block', width: 22, height: 2, background: 'var(--ink)', borderRadius: 2 }} />
-              <span style={{ display: 'block', width: 22, height: 2, background: 'var(--ink)', borderRadius: 2 }} />
+              <span style={{
+                display: 'block', width: 22, height: 2, background: 'var(--ink)', borderRadius: 2,
+                transition: 'transform .22s ease, opacity .22s ease',
+                transform: menuOpen ? 'translateY(7px) rotate(45deg)' : 'none',
+              }} />
+              <span style={{
+                display: 'block', width: 22, height: 2, background: 'var(--ink)', borderRadius: 2,
+                transition: 'opacity .22s ease',
+                opacity: menuOpen ? 0 : 1,
+              }} />
+              <span style={{
+                display: 'block', width: 22, height: 2, background: 'var(--ink)', borderRadius: 2,
+                transition: 'transform .22s ease, opacity .22s ease',
+                transform: menuOpen ? 'translateY(-7px) rotate(-45deg)' : 'none',
+              }} />
             </button>
           </div>
         </div>
@@ -163,17 +170,23 @@ export function Navbar() {
       <AnimatePresence>
         {menuOpen && (
           <motion.nav
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: .18 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: .2 }}
             style={{
+              position: 'fixed',
+              top: 68,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              height: 'calc(100dvh - 68px)',
               display: 'flex',
               flexDirection: 'column',
               gap: 4,
-              padding: '16px 32px 24px',
-              borderBottom: '1px solid var(--border)',
-              background: 'rgba(248, 245, 240, .97)',
+              padding: '24px 32px calc(24px + env(safe-area-inset-bottom))',
+              background: 'var(--bg)',
+              overflowY: 'auto',
             }}
           >
             {links.map(l => (
@@ -187,8 +200,7 @@ export function Navbar() {
                   fontWeight: 500,
                   color: 'var(--ink)',
                   textDecoration: 'none',
-                  padding: '10px 14px',
-                  borderRadius: 'var(--radius-sm)',
+                  padding: '10px 0',
                 }}
               >
                 {l.label}
@@ -201,7 +213,7 @@ export function Navbar() {
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                marginTop: 8,
+                marginTop: 'auto',
                 fontFamily: 'var(--sans)',
                 fontWeight: 680,
                 fontSize: '.95rem',

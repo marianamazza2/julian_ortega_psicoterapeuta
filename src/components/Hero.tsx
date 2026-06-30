@@ -1,11 +1,11 @@
 import { motion } from 'framer-motion'
 
 const services = [
-  'Psicoterapia individual para adultos',
-  'Terapia de pareja',
-  'Atención afirmativa LGBTIQ+',
-  'Orientación vocacional y laboral',
-  'Acompañamiento en procesos migratorios',
+  { label: 'Psicoterapia individual para adultos', color: 'var(--teal)', tint: 'var(--sage-tint)' },
+  { label: 'Terapia de pareja', color: 'var(--coral)', tint: 'var(--coral-tint)' },
+  { label: 'Atención afirmativa LGBTIQ+', color: 'var(--lilac)', tint: 'var(--lilac-tint)' },
+  { label: 'Orientación vocacional y laboral', color: 'var(--teal)', tint: 'var(--sage-tint)' },
+  { label: 'Acompañamiento en procesos migratorios', color: 'var(--coral)', tint: 'var(--coral-tint)' },
 ]
 
 const fadeUp = (delay = 0) => ({
@@ -17,6 +17,7 @@ const fadeUp = (delay = 0) => ({
 export function Hero() {
   return (
     <section
+      className="hero-section"
       style={{
         paddingTop: 160,
         paddingBottom: 100,
@@ -31,13 +32,33 @@ export function Hero() {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: '1fr 400px',
+            gridTemplateColumns: '420px 1fr',
             gap: 60,
             alignItems: 'center',
           }}
           className="hero-grid"
         >
-          {/* Left: text */}
+          {/* Left: photo */}
+          <motion.div
+            initial={{ opacity: 0, x: -28 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.65, ease: 'easeOut', delay: 0.2 }}
+            className="hero-photo"
+            style={{
+              borderRadius: 'var(--radius-lg)',
+              overflow: 'hidden',
+              boxShadow: '0 22px 50px -28px rgba(36,53,49,.32)',
+              aspectRatio: '4 / 5',
+            }}
+          >
+            <img
+              src="/julian-ortega.png"
+              alt="Dr. Julián Ortega"
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
+          </motion.div>
+
+          {/* Right: text */}
           <div>
             <motion.span
               {...fadeUp(0.05)}
@@ -62,7 +83,7 @@ export function Hero() {
                 fontFamily: 'var(--serif)',
                 fontSize: 'clamp(2.5rem, 5.2vw, 4rem)',
                 fontWeight: 400,
-                lineHeight: 1.06,
+                lineHeight: 1.14,
                 letterSpacing: '-.02em',
                 color: 'var(--ink)',
                 marginBottom: '.55em',
@@ -91,10 +112,12 @@ export function Hero() {
 
             <motion.div
               {...fadeUp(0.32)}
+              className="hero-cta"
               style={{ display: 'flex', gap: 14, flexWrap: 'wrap', alignItems: 'center' }}
             >
               <a
                 href="#contacto"
+                className="hero-cta-primary"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -125,6 +148,7 @@ export function Hero() {
               </a>
               <a
                 href="#sobre-mi"
+                className="hero-cta-secondary"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -156,7 +180,8 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* Right: card */}
+          {/* Card — ocultada por el momento (no se renderiza, se conserva el código) */}
+          {false && (
           <motion.div
             initial={{ opacity: 0, x: 28 }}
             animate={{ opacity: 1, x: 0 }}
@@ -196,12 +221,12 @@ export function Hero() {
             <h3 style={{
               fontFamily: 'var(--serif)',
               fontSize: '1.28rem',
-              fontWeight: 460,
+              fontWeight: 600,
               color: 'var(--teal-strong)',
               marginBottom: 6,
               lineHeight: 1.25,
             }}>
-              Un espacio seguro,<br />sin juicios
+              Un espacio seguro, sin juicios
             </h3>
 
             <p style={{
@@ -215,23 +240,24 @@ export function Hero() {
 
             <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: 9, marginBottom: 24 }}>
               {services.map(s => (
-                <li key={s} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: '.9rem', color: 'var(--ink)', lineHeight: 1.5 }}>
+                <li key={s.label} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: '.9rem', color: 'var(--ink)', lineHeight: 1.5 }}>
                   <span style={{
                     flexShrink: 0,
                     width: 18,
                     height: 18,
                     borderRadius: 5,
-                    background: 'var(--coral-tint)',
+                    background: s.tint,
+                    color: s.color,
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     marginTop: 2,
                   }}>
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#EC9A78" strokeWidth="2.8">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8">
                       <path d="M20 6L9 17l-5-5" />
                     </svg>
                   </span>
-                  {s}
+                  {s.label}
                 </li>
               ))}
             </ul>
@@ -255,13 +281,14 @@ export function Hero() {
               ))}
             </div>
           </motion.div>
+          )}
         </div>
       </div>
 
       <style>{`
         @media (max-width: 820px) {
           .hero-grid { grid-template-columns: 1fr !important; }
-          .hero-card { display: none !important; }
+          .hero-photo { max-width: 360px; margin: 0 auto; }
         }
       `}</style>
     </section>

@@ -12,7 +12,7 @@ const badges = [
   },
   {
     label: 'Primera sesión orientativa',
-    variant: 'teal',
+    variant: 'coral',
     icon: (
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <rect x="3" y="4" width="18" height="16" rx="2" />
@@ -22,7 +22,7 @@ const badges = [
   },
   {
     label: 'Presencial & Online',
-    variant: 'coral',
+    variant: 'sky',
     icon: (
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <circle cx="12" cy="12" r="10" />
@@ -32,7 +32,7 @@ const badges = [
   },
   {
     label: 'Práctica inclusiva y afirmativa',
-    variant: 'teal',
+    variant: 'lilac',
     icon: (
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M12 21s-7-4.5-9.5-9A5.2 5.2 0 0 1 12 6a5.2 5.2 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9Z" />
@@ -41,20 +41,30 @@ const badges = [
   },
 ]
 
-const badgeStyle = (variant: string): React.CSSProperties => ({
-  display: 'inline-flex',
-  alignItems: 'center',
-  gap: 7,
-  fontFamily: 'var(--sans)',
-  fontWeight: 680,
-  fontSize: '.77rem',
-  letterSpacing: '.04em',
-  padding: '7px 15px',
-  borderRadius: 999,
-  ...(variant === 'teal'
-    ? { background: 'var(--sage-tint)', color: 'var(--teal-strong)' }
-    : { background: 'var(--coral-tint)', color: '#9C4A2C' }),
-})
+const palette: Record<string, { bg: string; color: string }> = {
+  teal: { bg: 'var(--sage-tint)', color: 'var(--teal-strong)' },
+  coral: { bg: 'var(--coral-tint)', color: '#9C4A2C' },
+  sky: { bg: 'var(--sky-tint)', color: '#2F6A87' },
+  lilac: { bg: 'var(--lilac-tint)', color: '#63507E' },
+  amber: { bg: 'var(--amber-tint)', color: '#8A6A1E' },
+}
+
+const badgeStyle = (variant: string): React.CSSProperties => {
+  const c = palette[variant] ?? palette.teal
+  return {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: 7,
+    fontFamily: 'var(--sans)',
+    fontWeight: 680,
+    fontSize: '.77rem',
+    letterSpacing: '.04em',
+    padding: '7px 15px',
+    borderRadius: 999,
+    background: c.bg,
+    color: c.color,
+  }
+}
 
 export function TrustBar() {
   return (
@@ -62,6 +72,7 @@ export function TrustBar() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5, delay: 0.5 }}
+      className="hidden-mobile"
       style={{
         padding: '18px 0',
         borderTop: '1px solid var(--border)',

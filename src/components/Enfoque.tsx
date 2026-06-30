@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { useRef, useState } from 'react'
 
 const perspectivas = [
   {
@@ -9,7 +10,7 @@ const perspectivas = [
     descripcion:
       'Presta atención a la historia personal, las experiencias significativas y los modos de relación que cada persona ha desarrollado a lo largo de su vida.',
     items: [
-      'Historia personal y vínculos tempranos',
+      'Historia personal y vínculos',
       'Experiencias significativas y su huella',
       'Modos habituales de relacionarse',
     ],
@@ -50,9 +51,31 @@ const fadeUp = (delay = 0) => ({
 })
 
 export function Enfoque() {
+  const gridRef = useRef<HTMLDivElement>(null)
+  const [active, setActive] = useState(0)
+
+  const onScroll = () => {
+    const el = gridRef.current
+    if (!el) return
+    const card = el.firstElementChild as HTMLElement | null
+    if (!card) return
+    const step = card.offsetWidth + 24
+    setActive(Math.round(el.scrollLeft / step))
+  }
+
+  const goTo = (i: number) => {
+    const el = gridRef.current
+    if (!el) return
+    const card = el.firstElementChild as HTMLElement | null
+    if (!card) return
+    const step = card.offsetWidth + 24
+    el.scrollTo({ left: i * step, behavior: 'smooth' })
+  }
+
   return (
     <section
       id="enfoque"
+      className="section-y"
       style={{
         padding: '96px 0',
         background: 'var(--bg-alt)',
@@ -84,7 +107,7 @@ export function Enfoque() {
               fontFamily: 'var(--serif)',
               fontSize: 'clamp(1.9rem, 4vw, 2.7rem)',
               fontWeight: 430,
-              lineHeight: 1.1,
+              lineHeight: 1.18,
               letterSpacing: '-.01em',
               color: 'var(--teal)',
               margin: '0 0 1.3rem',
@@ -110,6 +133,8 @@ export function Enfoque() {
 
         {/* Perspectivas */}
         <div
+          ref={gridRef}
+          onScroll={onScroll}
           className="enfoque-grid"
           style={{
             display: 'grid',
@@ -121,15 +146,16 @@ export function Enfoque() {
           {perspectivas.map((p, i) => (
             <motion.div
               key={i}
+              className="enfoque-card"
               {...fadeUp(0.1 + i * 0.09)}
               style={{
                 background: '#fff',
                 border: '1px solid var(--border)',
                 borderRadius: 'var(--radius-lg)',
-                padding: '30px 26px 32px',
+                padding: '34px 30px 36px',
                 display: 'flex',
                 flexDirection: 'column',
-                gap: 16,
+                gap: 18,
                 boxShadow: '0 4px 20px -12px rgba(36,53,49,.1)',
               }}
             >
@@ -138,8 +164,8 @@ export function Enfoque() {
                 style={{
                   fontFamily: 'var(--serif)',
                   fontSize: '2.2rem',
-                  fontWeight: 450,
-                  color: p.tint,
+                  fontWeight: 550,
+                  color: p.color,
                   lineHeight: 1,
                   letterSpacing: '-.02em',
                 }}
@@ -152,7 +178,7 @@ export function Enfoque() {
                 style={{
                   fontFamily: 'var(--serif)',
                   fontSize: '1.2rem',
-                  fontWeight: 450,
+                  fontWeight: 600,
                   color: p.color,
                   margin: 0,
                   lineHeight: 1.25,
@@ -166,7 +192,7 @@ export function Enfoque() {
                 style={{
                   fontSize: '.93rem',
                   color: 'var(--ink-soft)',
-                  lineHeight: 1.65,
+                  lineHeight: 1.7,
                   margin: 0,
                   flexGrow: 1,
                 }}
@@ -178,17 +204,17 @@ export function Enfoque() {
               <div style={{ height: 1, background: 'var(--border)' }} />
 
               {/* Items */}
-              <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 8 }}>
+              <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 11 }}>
                 {p.items.map((item, j) => (
                   <li
                     key={j}
                     style={{
                       display: 'flex',
                       alignItems: 'flex-start',
-                      gap: 9,
+                      gap: 10,
                       fontSize: '.88rem',
                       color: 'var(--ink)',
-                      lineHeight: 1.4,
+                      lineHeight: 1.5,
                     }}
                   >
                     <span
@@ -217,9 +243,31 @@ export function Enfoque() {
           ))}
         </div>
 
+        {/* Pagination dots (solo mobile) */}
+        <div className="enfoque-dots" style={{ display: 'none', justifyContent: 'center', gap: 8, margin: '-32px 0 40px' }}>
+          {perspectivas.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => goTo(i)}
+              aria-label={`Ir a la perspectiva ${i + 1}`}
+              style={{
+                width: i === active ? 22 : 8,
+                height: 8,
+                padding: 0,
+                border: 'none',
+                borderRadius: 999,
+                background: i === active ? 'var(--teal)' : 'var(--border)',
+                cursor: 'pointer',
+                transition: 'width .25s, background .25s',
+              }}
+            />
+          ))}
+        </div>
+
         {/* Cierre integrador */}
         <motion.div
           {...fadeUp(0.38)}
+          className="enfoque-cierre"
           style={{
             display: 'flex',
             alignItems: 'flex-start',
@@ -279,11 +327,28 @@ export function Enfoque() {
       </div>
 
       <style>{`
-        @media (max-width: 860px) {
+        @media (max-width: 860px) and (min-width: 641px) {
           .enfoque-grid { grid-template-columns: repeat(2, 1fr) !important; }
         }
-        @media (max-width: 540px) {
-          .enfoque-grid { grid-template-columns: 1fr !important; }
+        @media (max-width: 640px) {
+          .enfoque-grid {
+            display: flex !important;
+            grid-template-columns: none !important;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 24px !important;
+            padding: 4px 0 12px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+          }
+          .enfoque-grid::-webkit-scrollbar { display: none; }
+          .enfoque-card {
+            flex: 0 0 100% !important;
+            box-sizing: border-box;
+            scroll-snap-align: center;
+          }
+          .enfoque-dots { display: flex !important; }
+          .enfoque-cierre { display: none !important; }
         }
       `}</style>
     </section>

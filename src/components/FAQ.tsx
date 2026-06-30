@@ -34,6 +34,7 @@ export function FAQ() {
   return (
     <section
       id="faq"
+      className="section-y"
       style={{
         padding: '96px 0',
         borderBottom: '1px solid var(--border)',
@@ -73,7 +74,7 @@ export function FAQ() {
                 fontFamily: 'var(--serif)',
                 fontSize: 'clamp(1.9rem, 4vw, 2.7rem)',
                 fontWeight: 430,
-                lineHeight: 1.1,
+                lineHeight: 1.18,
                 letterSpacing: '-.01em',
                 color: 'var(--teal)',
                 margin: '0 0 1.3rem',
@@ -132,7 +133,7 @@ export function FAQ() {
           {/* Right: acordeón */}
           <motion.div
             {...fadeUp(0.1)}
-            style={{ display: 'flex', flexDirection: 'column', gap: 12 }}
+            style={{ display: 'flex', flexDirection: 'column', gap: 14 }}
           >
             {preguntas.map((p, i) => {
               const isOpen = abierto === i

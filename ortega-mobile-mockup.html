@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Julián Ortega — Mockup mobile (propuesta)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F6F4EF;            /* crema principal */
+    --bg-warm:#EEEAE2;       /* beige alterno */
+    --white:#FDFCF9;         /* tarjetas */
+    --green-deep:#2C534E;    /* titulares serif */
+    --green:#3F726B;         /* primario / botones */
+    --green-700:#34625C;     /* hover */
+    --green-soft:#4A6E69;
+    --terra:#C0805F;         /* eyebrow acento (subido para contraste) */
+    --ink:#283330;          /* texto oscuro */
+    --body:#535A56;          /* texto cuerpo (subido para contraste) */
+    --muted:#8A8E89;
+    --gold:#CBB78F;          /* hairline cálido */
+    --tint-green:#E6EEE0;
+    --tint-peach:#F7E7DC;
+    --tint-lilac:#EBE5F0;
+    --line:#E4DFD5;
+    --shadow:0 14px 34px -18px rgba(40,55,50,.28);
+    --shadow-sm:0 6px 18px -12px rgba(40,55,50,.30);
+    --r:22px;
+    --serif:'Cormorant Garamond',Georgia,serif;
+    --sans:'DM Sans',system-ui,sans-serif;
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    font-family:var(--sans);
+    color:var(--body);
+    background:#E7E2D8;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+
+  /* ---------- Presentación: marco tipo dispositivo ---------- */
+  .stage{
+    min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;
+    padding:34px 16px 60px;
+    gap:18px;
+  }
+  .stage-head{text-align:center;max-width:420px;color:#5b6360}
+  .stage-head h1{
+    font-family:var(--serif);font-weight:600;color:#2C534E;
+    font-size:25px;margin:0 0 4px;letter-spacing:.2px;
+  }
+  .stage-head p{margin:0;font-size:13px;letter-spacing:.2px}
+
+  .device{
+    width:100%;max-width:412px;
+    background:var(--bg);
+    border-radius:42px;
+    box-shadow:0 40px 90px -40px rgba(40,55,50,.55), 0 0 0 11px #20262450, 0 0 0 13px #11161430;
+    overflow:hidden;
+    position:relative;
+    isolation:isolate;
+  }
+  /* notch */
+  .device::before{
+    content:"";position:absolute;top:9px;left:50%;transform:translateX(-50%);
+    width:120px;height:26px;background:#1a201e;border-radius:0 0 16px 16px;z-index:60;
+  }
+  .screen{
+    height:760px;
+    overflow-y:auto;overflow-x:hidden;
+    scroll-behavior:smooth;
+    position:relative;
+    -webkit-overflow-scrolling:touch;
+  }
+  .screen::-webkit-scrollbar{width:0}
+
+  /* ---------- Topbar ---------- */
+  .topbar{
+    position:sticky;top:0;z-index:40;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:30px 22px 14px;
+    background:linear-gradient(var(--bg) 72%, rgba(246,244,239,0));
+    transition:padding .25s ease, box-shadow .25s ease, background .25s ease;
+  }
+  .topbar.shrunk{
+    padding:14px 22px;
+    background:rgba(246,244,239,.92);
+    backdrop-filter:saturate(1.1) blur(8px);
+    box-shadow:0 1px 0 var(--line);
+  }
+  .brand{font-family:var(--serif);font-style:italic;font-weight:500;font-size:22px;color:var(--green-deep);letter-spacing:.2px}
+  .menu-btn{
+    width:44px;height:44px;border:0;background:transparent;cursor:pointer;
+    display:grid;place-items:center;border-radius:12px;color:var(--green-deep);
+  }
+  .menu-btn:hover{background:#0000000a}
+  .menu-btn span{display:block;width:22px;height:2px;background:currentColor;border-radius:2px;position:relative}
+  .menu-btn span::before,.menu-btn span::after{content:"";position:absolute;left:0;width:22px;height:2px;background:currentColor;border-radius:2px}
+  .menu-btn span::before{top:-7px}.menu-btn span::after{top:7px}
+
+  /* ---------- Eyebrow / headings ---------- */
+  .eyebrow{
+    font-size:11.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+    margin:0 0 14px;
+  }
+  .eyebrow.green{color:var(--green-soft)}
+  .eyebrow.terra{color:var(--terra)}
+  .h-serif{font-family:var(--serif);font-weight:600;color:var(--green-deep);line-height:1.04;letter-spacing:.2px;margin:0}
+  .lead{font-size:16px;line-height:1.62;color:var(--body);margin:18px 0 0}
+
+  section{padding:46px 22px}
+  .sec-cream{background:var(--bg)}
+  .sec-warm{background:var(--bg-warm)}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:8px 22px 30px;background:linear-gradient(180deg,var(--bg) 60%,#F3EFE6)}
+  .hero h1{font-size:44px}
+  .hero h1 em{font-style:italic;color:var(--green);display:block}
+  .hero .lead{max-width:34ch}
+  .hero-cta{display:flex;flex-direction:column;gap:11px;margin-top:26px}
+
+  .btn{
+    appearance:none;border:0;cursor:pointer;font-family:var(--sans);
+    font-weight:600;font-size:15.5px;letter-spacing:.2px;
+    border-radius:40px;padding:16px 22px;
+    display:inline-flex;align-items:center;justify-content:center;gap:9px;
+    min-height:54px;transition:transform .15s ease, background .2s ease, box-shadow .2s ease;
+    text-decoration:none;
+  }
+  .btn:active{transform:translateY(1px)}
+  .btn-primary{background:var(--green);color:#fff;box-shadow:0 12px 24px -12px rgba(63,114,107,.7)}
+  .btn-primary:hover{background:var(--green-700)}
+  .btn-ghost{background:transparent;color:var(--green-deep);border:1.5px solid var(--green)}
+  .btn-ghost:hover{background:#3f726b10}
+  .btn .arr{transition:transform .2s ease}
+  .btn:hover .arr{transform:translateX(3px)}
+
+  /* trust strip */
+  .trust{
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+    margin-top:26px;padding-top:20px;border-top:1px solid var(--line);
+    font-size:12.5px;color:var(--green-soft);font-weight:500;letter-spacing:.02em;
+  }
+  .trust b{color:var(--green-deep)}
+  .dotsep{width:4px;height:4px;border-radius:50%;background:var(--gold)}
+
+  /* ---------- Sobre mí: segmented ---------- */
+  .seg{
+    display:flex;gap:8px;margin:24px 0 22px;background:#fff;
+    padding:5px;border-radius:40px;box-shadow:var(--shadow-sm);
+  }
+  .seg button{
+    flex:1;border:0;background:transparent;cursor:pointer;font-family:var(--sans);
+    font-weight:600;font-size:13.5px;color:var(--green-deep);
+    padding:11px 6px;border-radius:32px;display:flex;align-items:center;justify-content:center;gap:6px;
+    transition:background .2s ease,color .2s ease;
+  }
+  .seg button[aria-selected="true"]{background:var(--green);color:#fff}
+  .seg svg{width:15px;height:15px;flex:none}
+  .panel{display:none;animation:fade .35s ease}
+  .panel.active{display:block}
+  .panel h3{font-family:var(--serif);font-weight:600;color:var(--green-soft);font-size:25px;line-height:1.12;margin:0 0 12px}
+  .panel p{font-size:15.5px;line-height:1.6;margin:0}
+
+  /* credentials card */
+  .cred{margin-top:26px;background:var(--white);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+  .cred-toggle{
+    width:100%;border:0;background:transparent;cursor:pointer;font-family:var(--sans);
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    padding:20px 22px;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--green-soft);
+  }
+  .cred-toggle .chev{transition:transform .3s ease;color:var(--green)}
+  .cred[open] .cred-toggle .chev{transform:rotate(180deg)}
+  .cred-body{padding:0 22px;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease}
+  .cred[open] .cred-body{max-height:320px;padding:0 22px 8px}
+  .cred-body ul{list-style:none;margin:0;padding:14px 0 0;border-top:1px solid var(--line)}
+  .cred-body li{display:flex;gap:10px;font-size:14px;padding:7px 0;color:var(--ink)}
+  .cred-body li::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:var(--gold);margin-top:7px}
+  .cred-cta{padding:18px 22px 22px}
+
+  /* ---------- Carrusel ---------- */
+  .sec-head{margin-bottom:24px}
+  .sec-head.center{text-align:center}
+  .sec-head .h-serif{font-size:33px}
+  .rail{
+    display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;
+    margin:0 -22px;padding:4px 22px 6px;scroll-padding-left:22px;
+    -webkit-overflow-scrolling:touch;
+  }
+  .rail::-webkit-scrollbar{display:none}
+  .rail{scrollbar-width:none}
+  .card{
+    flex:0 0 86%;scroll-snap-align:start;background:var(--white);
+    border-radius:var(--r);box-shadow:var(--shadow);padding:26px 24px 28px;
+    border:1px solid #00000008;
+  }
+  .card h3{font-family:var(--serif);font-weight:600;color:var(--green-deep);font-size:24px;margin:0 0 10px;line-height:1.1}
+  .card p{font-size:14.5px;line-height:1.58;margin:0}
+  .card .divider{height:1px;background:var(--gold);opacity:.55;margin:20px 0}
+  .feats{list-style:none;margin:0;padding:0;display:grid;gap:13px}
+  .feats li{display:flex;align-items:flex-start;gap:11px;font-size:14.5px;color:var(--ink);line-height:1.35}
+  .check{flex:none;width:24px;height:24px;border-radius:50%;background:var(--tint-green);display:grid;place-items:center;margin-top:1px}
+  .check svg{width:13px;height:13px;color:var(--green)}
+  .num{font-family:var(--serif);font-weight:600;font-size:40px;color:var(--green-deep);line-height:1;margin-bottom:14px;display:block}
+
+  .dots{display:flex;gap:7px;justify-content:center;margin-top:22px}
+  .dots i{width:8px;height:8px;border-radius:50%;background:#CDC8BC;transition:width .3s ease,background .3s ease}
+  .dots i.on{width:24px;border-radius:5px;background:var(--green)}
+
+  .swipe-hint{display:flex;align-items:center;justify-content:center;gap:7px;margin-top:14px;font-size:12px;color:var(--muted);letter-spacing:.02em}
+
+  /* ---------- FAQ ---------- */
+  .faq-intro .lead{max-width:36ch}
+  .faq{display:grid;gap:12px;margin-top:26px}
+  .qa{background:var(--white);border-radius:18px;box-shadow:var(--shadow-sm);overflow:hidden;border:1px solid #00000006}
+  .qa summary{
+    list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:14px;
+    padding:18px 20px;font-weight:600;font-size:15px;color:var(--ink);
+  }
+  .qa summary::-webkit-details-marker{display:none}
+  .qa .qi{flex:none;width:30px;height:30px;border-radius:50%;background:var(--tint-green);display:grid;place-items:center;color:var(--green);transition:transform .3s ease}
+  .qa[open] .qi{transform:rotate(180deg)}
+  .qa .ans{padding:0 20px 20px;font-size:14.5px;line-height:1.6;color:var(--body);margin:0;animation:fade .3s ease}
+
+  /* ---------- Contacto ---------- */
+  .contact-rows{display:grid;gap:16px;margin:26px 0 28px}
+  .crow{display:flex;align-items:center;gap:14px}
+  .cicon{flex:none;width:50px;height:50px;border-radius:15px;display:grid;place-items:center}
+  .cicon svg{width:22px;height:22px}
+  .ci-green{background:var(--tint-green);color:var(--green)}
+  .ci-peach{background:var(--tint-peach);color:var(--terra)}
+  .ci-lilac{background:var(--tint-lilac);color:#7B6BA0}
+  .crow .lbl{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green-soft);margin:0 0 2px}
+  .crow .val{font-size:15.5px;color:var(--ink);margin:0;font-weight:500}
+
+  .form-card{background:var(--white);border-radius:var(--r);box-shadow:var(--shadow);padding:26px 22px 24px}
+  .form-card h3{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--green-soft);margin:0 0 20px}
+  .field{margin-bottom:16px}
+  .field label{display:block;font-size:13.5px;font-weight:600;color:var(--ink);margin-bottom:7px}
+  .field input,.field textarea,.field select{
+    width:100%;font-family:var(--sans);font-size:15px;color:var(--ink);
+    background:var(--bg);border:1.5px solid transparent;border-radius:13px;
+    padding:14px 15px;transition:border .2s ease,background .2s ease;
+  }
+  .field textarea{min-height:96px;resize:vertical}
+  .field input::placeholder,.field textarea::placeholder{color:#A7A9A2}
+  .field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--green);background:#fff}
+  .form-card .btn-primary{width:100%;margin-top:6px}
+  .privacy{font-size:11.5px;color:var(--muted);line-height:1.5;margin:14px 0 0;text-align:center}
+  .privacy a{color:var(--green-soft)}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--green-deep);color:#DCE6E1;padding:38px 22px 110px;text-align:center}
+  footer .fbrand{font-family:var(--serif);font-style:italic;font-size:24px;color:#fff;margin:0 0 6px}
+  footer p{margin:4px 0;font-size:13px;opacity:.85}
+  footer .fcred{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;opacity:.6;margin-top:14px}
+
+  /* ---------- Sticky action bar ---------- */
+  .action-bar{
+    position:absolute;left:0;right:0;bottom:0;z-index:50;
+    display:flex;gap:10px;align-items:center;
+    padding:13px 16px calc(13px + env(safe-area-inset-bottom));
+    background:rgba(246,244,239,.94);backdrop-filter:blur(10px) saturate(1.1);
+    border-top:1px solid var(--line);
+    transform:translateY(130%);transition:transform .35s cubic-bezier(.2,.8,.2,1);
+  }
+  .action-bar.show{transform:translateY(0)}
+  .action-bar .btn-primary{flex:1;min-height:50px;padding:14px 18px;font-size:15px}
+  .wa{
+    flex:none;width:50px;height:50px;border-radius:16px;border:1.5px solid var(--green);
+    background:#fff;color:var(--green);display:grid;place-items:center;cursor:pointer;
+    transition:background .2s ease;text-decoration:none;
+  }
+  .wa:hover{background:#3f726b10}
+  .wa svg{width:24px;height:24px}
+
+  /* ---------- Menú overlay ---------- */
+  .sheet{
+    position:absolute;inset:0;z-index:70;background:rgba(40,51,48,.4);
+    opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease;
+  }
+  .sheet.open{opacity:1;visibility:visible}
+  .sheet-inner{
+    position:absolute;top:0;left:0;right:0;background:var(--bg);
+    border-radius:0 0 30px 30px;padding:30px 24px 28px;
+    transform:translateY(-100%);transition:transform .35s cubic-bezier(.2,.8,.2,1);
+  }
+  .sheet.open .sheet-inner{transform:translateY(0)}
+  .sheet-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+  .sheet-top .brand{font-size:21px}
+  .x{width:40px;height:40px;border:0;background:#fff;border-radius:12px;cursor:pointer;color:var(--green-deep);font-size:20px;box-shadow:var(--shadow-sm)}
+  .sheet nav a{display:block;font-family:var(--serif);font-size:26px;color:var(--green-deep);text-decoration:none;padding:11px 0;border-bottom:1px solid var(--line)}
+  .sheet nav a:last-child{border-bottom:0}
+  .sheet .btn-primary{width:100%;margin-top:20px}
+
+  /* ---------- Reveal ---------- */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+    .reveal{opacity:1;transform:none}
+  }
+  :focus-visible{outline:2.5px solid var(--green);outline-offset:2px;border-radius:6px}
+
+  .annot{max-width:412px;width:100%;font-size:12.5px;color:#6a716d;line-height:1.5;text-align:center;margin-top:4px}
+  .annot b{color:#2C534E}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="stage-head">
+    <h1>Versión propuesta — Mobile</h1>
+    <p>Tabs, carrusel, acordeón y barra sticky funcionan de verdad. Probalos.</p>
+  </div>
+
+  <div class="device">
+    <div class="screen" id="screen">
+
+      <!-- TOPBAR -->
+      <div class="topbar" id="topbar">
+        <span class="brand">Dr. Julián Ortega</span>
+        <button class="menu-btn" id="menuBtn" aria-label="Abrir menú"><span></span></button>
+      </div>
+
+      <!-- HERO -->
+      <header class="hero">
+        <p class="eyebrow green reveal">Psicoterapia · Barcelona &amp; Online</p>
+        <h1 class="h-serif reveal">Un espacio para <em>comprender</em> lo que te sucede</h1>
+        <p class="lead reveal">Cuando las herramientas de siempre dejan de alcanzar, la terapia abre un lugar para escuchar, entender y construir nuevas formas de vivir lo que te pasa.</p>
+        <div class="hero-cta reveal">
+          <a class="btn btn-primary" href="#contacto">Reservar primera sesión <span class="arr">→</span></a>
+          <a class="btn btn-ghost" href="#sobre">Conoce mi enfoque</a>
+        </div>
+        <div class="trust reveal">
+          <span><b>COPC 35627</b> · Colegiado</span>
+          <span class="dotsep"></span>
+          <span>Plaza Cataluña</span>
+          <span class="dotsep"></span>
+          <span>Sesiones online</span>
+        </div>
+      </header>
+
+      <!-- SOBRE MÍ -->
+      <section class="sec-cream" id="sobre">
+        <p class="eyebrow terra reveal">Sobre mí</p>
+        <h2 class="h-serif reveal" style="font-size:32px">Una práctica clínica integrativa, comprometida con la diversidad</h2>
+
+        <div class="seg reveal" role="tablist" aria-label="Sobre mí">
+          <button role="tab" aria-selected="true" data-tab="quien">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+            Quién soy
+          </button>
+          <button role="tab" aria-selected="false" data-tab="enfoque">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></svg>
+            Enfoque
+          </button>
+          <button role="tab" aria-selected="false" data-tab="trabajo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg>
+            Trabajo
+          </button>
+        </div>
+
+        <div class="panel active" data-panel="quien">
+          <h3>Quién soy</h3>
+          <p>Soy psicólogo clínico y acompaño a personas adultas que atraviesan momentos de malestar, cambio o crisis. Trabajo desde la escucha y el respeto por el tiempo de cada quien, sin fórmulas: cada proceso se construye con la persona que tengo enfrente.</p>
+        </div>
+        <div class="panel" data-panel="enfoque">
+          <h3>Una práctica clínica integrativa</h3>
+          <p>Integro herramientas de distintas corrientes psicológicas para ofrecer una comprensión amplia de cada situación y una intervención ajustada a las necesidades particulares de cada persona.</p>
+        </div>
+        <div class="panel" data-panel="trabajo">
+          <h3>Diversidad sexual, vínculos y trabajo</h3>
+          <p>Mi doctorado en diversidad sexual y mi trayectoria en los estudios del trabajo me permiten abordar con especial sensibilidad la diversidad sexual y de género, la discriminación, los vínculos afectivos y el impacto del trabajo sobre la salud mental.</p>
+        </div>
+
+        <details class="cred">
+          <summary class="cred-toggle">Formación y credenciales
+            <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="cred-body">
+            <ul>
+              <li>Doctorado en diversidad sexual</li>
+              <li>Colegiado COPC nº 35627</li>
+              <li>Formación en estudios del trabajo y salud mental</li>
+              <li>Práctica integrativa: psicodinámica, sistémica y contextual</li>
+            </ul>
+          </div>
+          <div class="cred-cta">
+            <a class="btn btn-primary" href="#contacto" style="width:100%">Reservar primera sesión <span class="arr">→</span></a>
+          </div>
+        </details>
+      </section>
+
+      <!-- SERVICIOS -->
+      <section class="sec-warm" id="servicios">
+        <div class="sec-head center">
+          <p class="eyebrow terra reveal">Servicios</p>
+          <h2 class="h-serif reveal">En qué puedo ayudarte</h2>
+        </div>
+
+        <div class="rail" id="railServ">
+          <article class="card">
+            <h3>Psicoterapia individual</h3>
+            <p>Un espacio de escucha y acompañamiento para atravesar momentos de malestar emocional o vital.</p>
+            <div class="divider"></div>
+            <ul class="feats">
+              <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span> Ansiedad y estrés</li>
+              <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span> Dificultades vinculares, autoestima y crisis</li>
+              <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span> Malestar laboral, cambios y pérdidas</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>Diversidad sexual y de género</h3>
+            <p>Acompañamiento sensible a la identidad, la orientación y las experiencias de discriminación.</p>
+            <div class="divider"></div>
+            <ul class="feats">
+              <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span> Identidad y orientación</li>
+              <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span> Procesos de transición y aceptación</li>
+              <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span> Vivencias de discriminación</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>Vínculos y relaciones</h3>
+            <p>Para revisar los modos de relacionarse y los conflictos que se repiten en lo afectivo.</p>
+            <div class="divider"></div>
+            <ul class="feats">
+              <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span> Dependencia y autonomía</li>
+              <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span> Conflictos que se repiten</li>
+              <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span> Duelos y separaciones</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>Salud mental y trabajo</h3>
+            <p>El impacto del trabajo sobre el bienestar: desgaste, sentido y momentos de cambio profesional.</p>
+            <div class="divider"></div>
+            <ul class="feats">
+              <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span> Desgaste y agotamiento</li>
+              <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span> Cambios y transiciones</li>
+              <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span> Sentido y motivación</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>Sesiones online</h3>
+            <p>El mismo acompañamiento por videollamada, estés donde estés, con la misma continuidad.</p>
+            <div class="divider"></div>
+            <ul class="feats">
+              <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span> Plataforma segura</li>
+              <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span> Flexibilidad horaria</li>
+              <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span> Misma continuidad</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="dots" id="dotsServ"></div>
+        <div class="swipe-hint">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg>
+          Desliza para ver los 5 servicios
+        </div>
+      </section>
+
+      <!-- ENFOQUE -->
+      <section class="sec-cream">
+        <a class="btn btn-primary" href="#contacto" style="width:100%;margin-bottom:38px">Reservar primera sesión <span class="arr">→</span></a>
+        <div class="sec-head">
+          <p class="eyebrow terra reveal">Mi enfoque de trabajo</p>
+          <h2 class="h-serif reveal">Una mirada integrativa sobre las personas y sus vínculos</h2>
+          <p class="lead reveal">El sufrimiento psicológico es complejo y no puede comprenderse desde una sola perspectiva. Por eso combino distintas miradas para acercarme a cada persona en su singularidad.</p>
+        </div>
+
+        <div class="rail" id="railEnf">
+          <article class="card">
+            <span class="num">01</span>
+            <h3>Perspectiva psicodinámica</h3>
+            <p>Presta atención a la historia personal, las experiencias significativas y los modos de relación que cada persona ha desarrollado a lo largo de su vida.</p>
+            <div class="divider"></div>
+            <ul class="feats">
+              <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span> Historia personal y vínculos</li>
+              <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span> Experiencias significativas y su huella</li>
+              <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span> Modos habituales de relacionarse</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <span class="num">02</span>
+            <h3>Perspectiva sistémica</h3>
+            <p>Mira a la persona dentro de sus contextos —familia, pareja, trabajo— y entiende el malestar como parte de una trama de relaciones.</p>
+            <div class="divider"></div>
+            <ul class="feats">
+              <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span> Contextos familiares y de pareja</li>
+              <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span> Patrones que se repiten</li>
+              <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span> Recursos y apoyos disponibles</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <span class="num">03</span>
+            <h3>Perspectiva contextual</h3>
+            <p>Reconoce el peso de lo social: género, diversidad, trabajo y desigualdad como factores que atraviesan la experiencia y el bienestar.</p>
+            <div class="divider"></div>
+            <ul class="feats">
+              <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span> Diversidad sexual y de género</li>
+              <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span> Trabajo y salud mental</li>
+              <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span> Discriminación y desigualdad</li>
+            </ul>
+          </article>
+        </div>
+        <div class="dots" id="dotsEnf"></div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="sec-warm faq-intro">
+        <p class="eyebrow terra reveal">Preguntas frecuentes</p>
+        <h2 class="h-serif reveal" style="font-size:34px">Dudas habituales antes de comenzar</h2>
+        <p class="lead reveal">Si tienes otra pregunta, puedes escribirme directamente y te responderé en breve.</p>
+        <a class="btn btn-ghost reveal" href="#contacto" style="margin-top:22px">Escribir una consulta <span class="arr">→</span></a>
+
+        <div class="faq">
+          <details class="qa" open>
+            <summary>¿Cuánto dura una sesión?
+              <span class="qi"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg></span>
+            </summary>
+            <p class="ans">Las sesiones individuales duran entre 50 y 60 minutos. La primera entrevista puede extenderse un poco más para conocernos con calma.</p>
+          </details>
+          <details class="qa">
+            <summary>¿La terapia puede realizarse online?
+              <span class="qi"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg></span>
+            </summary>
+            <p class="ans">Sí. Las sesiones por videollamada mantienen la misma continuidad y cuidado que las presenciales, a través de una plataforma segura.</p>
+          </details>
+          <details class="qa">
+            <summary>¿Cada cuánto son las sesiones?
+              <span class="qi"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg></span>
+            </summary>
+            <p class="ans">Lo habitual es una sesión semanal, aunque la frecuencia se acuerda según el momento y las necesidades de cada proceso.</p>
+          </details>
+          <details class="qa">
+            <summary>¿Cómo es la primera entrevista?
+              <span class="qi"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg></span>
+            </summary>
+            <p class="ans">Es un primer encuentro para conocer qué te trae a la consulta, sin compromiso. A partir de ahí pensamos juntos cómo seguir.</p>
+          </details>
+        </div>
+      </section>
+
+      <!-- CONTACTO -->
+      <section class="sec-cream" id="contacto">
+        <p class="eyebrow terra reveal">Contacto</p>
+        <h2 class="h-serif reveal" style="font-size:36px">Solicita una primera entrevista</h2>
+
+        <div class="contact-rows reveal">
+          <div class="crow">
+            <span class="cicon ci-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-5-7-11a7 7 0 0 1 14 0c0 6-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+            <div><p class="lbl">Presencial</p><p class="val">Barcelona — zona Plaza Cataluña</p></div>
+          </div>
+          <div class="crow">
+            <span class="cicon ci-peach"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span>
+            <div><p class="lbl">Online</p><p class="val">Sesiones por videollamada</p></div>
+          </div>
+          <div class="crow">
+            <span class="cicon ci-lilac"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg></span>
+            <div><p class="lbl">Colegiación</p><p class="val">COPC 35627</p></div>
+          </div>
+        </div>
+
+        <div class="form-card reveal">
+          <h3>Formulario de contacto</h3>
+          <div class="field">
+            <label for="n">Nombre</label>
+            <input id="n" type="text" placeholder="Tu nombre">
+          </div>
+          <div class="field">
+            <label for="e">Correo electrónico</label>
+            <input id="e" type="email" placeholder="tu@correo.com">
+          </div>
+          <div class="field">
+            <label for="m">Modalidad</label>
+            <select id="m">
+              <option>Presencial — Barcelona</option>
+              <option>Online — videollamada</option>
+              <option>Aún no lo sé</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="msg">¿Qué te gustaría consultar?</label>
+            <textarea id="msg" placeholder="Cuéntame brevemente qué te trae por aquí (opcional)"></textarea>
+          </div>
+          <button class="btn btn-primary" type="button">Reservar primera sesión <span class="arr">→</span></button>
+          <p class="privacy">Tus datos se tratan con confidencialidad. Al enviar aceptas la <a href="#">política de privacidad</a>.</p>
+        </div>
+      </section>
+
+      <footer>
+        <p class="fbrand">Dr. Julián Ortega</p>
+        <p>Psicoterapia · Barcelona &amp; Online</p>
+        <p>hola@julianortega.es</p>
+        <p class="fcred">Colegiado COPC 35627</p>
+      </footer>
+
+      <!-- STICKY ACTION BAR -->
+      <div class="action-bar" id="actionBar">
+        <a class="btn btn-primary" href="#contacto">Reservar primera sesión</a>
+        <a class="wa" href="#" aria-label="Escribir por WhatsApp">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 0 1 6.9 12.6l-.2.3.7 2.6-2.7-.7-.3.2A8.2 8.2 0 1 1 12 3.8zm-3 4c-.2 0-.5.1-.7.4-.3.3-.9.9-.9 2.1s.9 2.5 1.1 2.6c.1.2 1.8 2.9 4.5 3.9 2.2.9 2.7.7 3.2.7s1.6-.6 1.8-1.3c.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3l-1.6-.8c-.2-.1-.4-.1-.6.1l-.6.8c-.1.2-.3.2-.5.1s-1.1-.4-2-1.2c-.7-.6-1.2-1.4-1.3-1.6s0-.4.1-.5l.4-.5c.1-.2.1-.3.2-.5s0-.4 0-.5l-.7-1.7c-.2-.5-.4-.4-.6-.4z"/></svg>
+        </a>
+      </div>
+
+      <!-- MENU SHEET -->
+      <div class="sheet" id="sheet">
+        <div class="sheet-inner">
+          <div class="sheet-top">
+            <span class="brand">Dr. Julián Ortega</span>
+            <button class="x" id="closeSheet" aria-label="Cerrar menú">✕</button>
+          </div>
+          <nav>
+            <a href="#sobre" data-close>Sobre mí</a>
+            <a href="#servicios" data-close>Servicios</a>
+            <a href="#contacto" data-close>Enfoque</a>
+            <a href="#contacto" data-close>Contacto</a>
+          </nav>
+          <a class="btn btn-primary" href="#contacto" data-close>Reservar primera sesión <span class="arr">→</span></a>
+        </div>
+      </div>
+
+    </div><!-- /screen -->
+  </div><!-- /device -->
+
+  <p class="annot">Construido en HTML/CSS/JS plano para que lo lleves directo a tu stack <b>React + Vite</b>. Decime y te lo paso a componentes JSX con los mismos tokens.</p>
+</div>
+
+<script>
+  const screen = document.getElementById('screen');
+  const topbar = document.getElementById('topbar');
+  const actionBar = document.getElementById('actionBar');
+  const hero = document.querySelector('.hero');
+
+  // Topbar shrink + sticky CTA after hero
+  screen.addEventListener('scroll', () => {
+    const y = screen.scrollTop;
+    topbar.classList.toggle('shrunk', y > 30);
+    const heroBottom = hero.offsetTop + hero.offsetHeight;
+    actionBar.classList.toggle('show', y > heroBottom - 200);
+  });
+
+  // Tabs
+  const seg = document.querySelector('.seg');
+  seg.addEventListener('click', e => {
+    const b = e.target.closest('button'); if(!b) return;
+    seg.querySelectorAll('button').forEach(x => x.setAttribute('aria-selected', x===b));
+    document.querySelectorAll('.panel').forEach(p =>
+      p.classList.toggle('active', p.dataset.panel === b.dataset.tab));
+  });
+
+  // Carousel dots
+  function buildDots(railId, dotsId){
+    const rail = document.getElementById(railId);
+    const dotsWrap = document.getElementById(dotsId);
+    const cards = rail.querySelectorAll('.card');
+    cards.forEach((_,i)=>{ const d=document.createElement('i'); if(i===0)d.classList.add('on'); dotsWrap.appendChild(d); });
+    const dots = dotsWrap.querySelectorAll('i');
+    rail.addEventListener('scroll', ()=>{
+      const idx = Math.round(rail.scrollLeft / (rail.scrollWidth/cards.length));
+      dots.forEach((d,i)=>d.classList.toggle('on', i===Math.min(idx,cards.length-1)));
+    },{passive:true});
+  }
+  buildDots('railServ','dotsServ');
+  buildDots('railEnf','dotsEnf');
+
+  // FAQ: single open
+  const qas = document.querySelectorAll('.qa');
+  qas.forEach(q => q.addEventListener('toggle', () => {
+    if(q.open) qas.forEach(o => { if(o!==q) o.open=false; });
+  }));
+
+  // Menu sheet
+  const sheet = document.getElementById('sheet');
+  document.getElementById('menuBtn').onclick = ()=> sheet.classList.add('open');
+  document.getElementById('closeSheet').onclick = ()=> sheet.classList.remove('open');
+  sheet.addEventListener('click', e => { if(e.target===sheet) sheet.classList.remove('open'); });
+  sheet.querySelectorAll('[data-close]').forEach(a => a.onclick = ()=> sheet.classList.remove('open'));
+
+  // Smooth in-screen anchor scroll (since screen scrolls, not window)
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', e=>{
+      const t = document.querySelector(a.getAttribute('href'));
+      if(t){ e.preventDefault(); screen.scrollTo({top:t.offsetTop-60, behavior:'smooth'}); }
+    });
+  });
+
+  // Reveal on scroll
+  const io = new IntersectionObserver(es=>{
+    es.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);} });
+  },{root:screen, threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

@@ -1,4 +1,7 @@
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useRef, useState, useLayoutEffect } from 'react'
+
+const GAP = 24
 
 const servicios = [
   {
@@ -96,209 +99,364 @@ const fadeUp = (delay = 0) => ({
   transition: { duration: 0.55, ease: 'easeOut' as const, delay },
 })
 
-export function Servicios() {
+type Servicio = (typeof servicios)[number]
+
+function ServicioCard({ s, width, hideIcon }: { s: Servicio; width?: number; hideIcon?: boolean }) {
   return (
-    <section
-      id="servicios"
+    <motion.div
       style={{
-        padding: '96px 0',
-        borderBottom: '1px solid var(--border)',
+        flex: width ? `0 0 ${width}px` : '0 0 100%',
+        background: '#fff',
+        border: '1px solid var(--border)',
+        borderRadius: 'var(--radius-lg)',
+        padding: '32px 30px 34px',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 18,
+        boxShadow: '0 4px 20px -12px rgba(36,53,49,.12)',
+        transition: 'box-shadow .2s, transform .2s',
       }}
+      whileHover={{ y: -4 }}
     >
-      <div style={{ maxWidth: 1060, margin: '0 auto', padding: '0 32px' }}>
-        {/* Header */}
-        <div style={{ textAlign: 'center', marginBottom: 64 }}>
-          <motion.span
-            {...fadeUp(0)}
-            style={{
-              display: 'block',
-              fontFamily: 'var(--sans)',
-              fontWeight: 680,
-              fontSize: '.75rem',
-              letterSpacing: '.2em',
-              textTransform: 'uppercase',
-              color: 'var(--coral)',
-              marginBottom: '1rem',
-            }}
-          >
-            Servicios
-          </motion.span>
-
-          <motion.h2
-            {...fadeUp(0.07)}
-            style={{
-              fontFamily: 'var(--serif)',
-              fontSize: 'clamp(1.9rem, 4vw, 2.7rem)',
-              fontWeight: 430,
-              lineHeight: 1.1,
-              letterSpacing: '-.01em',
-              color: 'var(--teal)',
-              margin: '0 auto',
-              maxWidth: '18ch',
-            }}
-          >
-            En qué puedo ayudarte
-          </motion.h2>
-        </div>
-
-        {/* Grid */}
+      {/* Icon */}
+      {!hideIcon && (
         <div
-          className="servicios-grid"
           style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: 24,
+            width: 48,
+            height: 48,
+            borderRadius: 14,
+            background: s.tint,
+            color: s.color,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexShrink: 0,
           }}
         >
-          {servicios.map((s, i) => (
-            <motion.div
-              key={i}
-              {...fadeUp(0.07 + i * 0.07)}
-              style={{
-                background: '#fff',
-                border: '1px solid var(--border)',
-                borderRadius: 'var(--radius-lg)',
-                padding: '28px 26px 30px',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 16,
-                boxShadow: '0 4px 20px -12px rgba(36,53,49,.12)',
-                transition: 'box-shadow .2s, transform .2s',
-              }}
-              whileHover={{ y: -4 }}
-            >
-              {/* Icon */}
-              <div
-                style={{
-                  width: 48,
-                  height: 48,
-                  borderRadius: 14,
-                  background: s.tint,
-                  color: s.color,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexShrink: 0,
-                }}
-              >
-                {s.icon}
-              </div>
-
-              {/* Title */}
-              <h3
-                style={{
-                  fontFamily: 'var(--serif)',
-                  fontSize: '1.2rem',
-                  fontWeight: 450,
-                  color: 'var(--teal)',
-                  margin: 0,
-                  lineHeight: 1.25,
-                }}
-              >
-                {s.titulo}
-              </h3>
-
-              {/* Description */}
-              <p
-                style={{
-                  fontSize: '.93rem',
-                  color: 'var(--ink-soft)',
-                  lineHeight: 1.65,
-                  margin: 0,
-                }}
-              >
-                {s.descripcion}
-              </p>
-
-              {/* Divider */}
-              <div style={{ height: 1, background: 'var(--border)' }} />
-
-              {/* Items */}
-              <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 8 }}>
-                {s.items.map((item, j) => (
-                  <li
-                    key={j}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'flex-start',
-                      gap: 9,
-                      fontSize: '.88rem',
-                      color: 'var(--ink)',
-                      lineHeight: 1.4,
-                    }}
-                  >
-                    <span
-                      style={{
-                        flexShrink: 0,
-                        marginTop: 3,
-                        width: 16,
-                        height: 16,
-                        borderRadius: 999,
-                        background: s.tint,
-                        color: s.color,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                      }}
-                    >
-                      <svg width="9" height="9" viewBox="0 0 12 12" fill="none">
-                        <path d="M2 6.5l3 3 5-5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
+          {s.icon}
         </div>
+      )}
 
-        {/* CTA bottom */}
-        <motion.div
-          {...fadeUp(0.42)}
-          style={{ textAlign: 'center', marginTop: 56 }}
-        >
-          <a
-            href="#contacto"
+      {/* Title */}
+      <h3
+        style={{
+          fontFamily: 'var(--serif)',
+          fontSize: '1.2rem',
+          fontWeight: 600,
+          color: 'var(--teal)',
+          margin: 0,
+          lineHeight: 1.25,
+        }}
+      >
+        {s.titulo}
+      </h3>
+
+      {/* Description */}
+      <p
+        style={{
+          fontSize: '.93rem',
+          color: 'var(--ink-soft)',
+          lineHeight: 1.7,
+          margin: 0,
+        }}
+      >
+        {s.descripcion}
+      </p>
+
+      {/* Divider */}
+      <div style={{ height: 1, background: 'var(--border)' }} />
+
+      {/* Items */}
+      <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 11 }}>
+        {s.items.map((item, j) => (
+          <li
+            key={j}
             style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 8,
-              fontFamily: 'var(--sans)',
-              fontWeight: 680,
-              fontSize: '.95rem',
-              padding: '14px 28px',
-              borderRadius: 999,
-              background: 'var(--teal-cta)',
-              color: '#fff',
-              textDecoration: 'none',
-              boxShadow: '0 8px 22px -10px rgba(31,92,86,.5)',
-              transition: 'background .15s, transform .15s',
-            }}
-            onMouseEnter={e => {
-              const t = e.currentTarget
-              t.style.background = 'var(--teal-cta-strong)'
-              t.style.transform = 'translateY(-2px)'
-            }}
-            onMouseLeave={e => {
-              const t = e.currentTarget
-              t.style.background = 'var(--teal-cta)'
-              t.style.transform = 'translateY(0)'
+              display: 'flex',
+              alignItems: 'flex-start',
+              gap: 10,
+              fontSize: '.88rem',
+              color: 'var(--ink)',
+              lineHeight: 1.5,
             }}
           >
-            Solicitar primera sesión →
-          </a>
-        </motion.div>
+            <span
+              style={{
+                flexShrink: 0,
+                marginTop: 3,
+                width: 16,
+                height: 16,
+                borderRadius: 999,
+                background: s.tint,
+                color: s.color,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <svg width="9" height="9" viewBox="0 0 12 12" fill="none">
+                <path d="M2 6.5l3 3 5-5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+            {item}
+          </li>
+        ))}
+      </ul>
+    </motion.div>
+  )
+}
+
+function SectionHeader() {
+  return (
+    <div style={{ textAlign: 'center', marginBottom: 40 }}>
+      <motion.span
+        {...fadeUp(0)}
+        style={{
+          display: 'block',
+          fontFamily: 'var(--sans)',
+          fontWeight: 680,
+          fontSize: '.75rem',
+          letterSpacing: '.2em',
+          textTransform: 'uppercase',
+          color: 'var(--coral)',
+          marginBottom: '1rem',
+        }}
+      >
+        Servicios
+      </motion.span>
+
+      <motion.h2
+        {...fadeUp(0.07)}
+        style={{
+          fontFamily: 'var(--serif)',
+          fontSize: 'clamp(1.9rem, 4vw, 2.7rem)',
+          fontWeight: 430,
+          lineHeight: 1.18,
+          letterSpacing: '-.01em',
+          color: 'var(--teal)',
+          margin: '0 auto',
+          whiteSpace: 'nowrap',
+        }}
+      >
+        En qué puedo ayudarte
+      </motion.h2>
+    </div>
+  )
+}
+
+function CtaButton() {
+  return (
+    <div style={{ textAlign: 'center' }}>
+      <a
+        href="#contacto"
+        style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: 8,
+          fontFamily: 'var(--sans)',
+          fontWeight: 680,
+          fontSize: '.95rem',
+          padding: '14px 28px',
+          borderRadius: 999,
+          background: 'var(--teal-cta)',
+          color: '#fff',
+          textDecoration: 'none',
+          boxShadow: '0 8px 22px -10px rgba(31,92,86,.5)',
+          transition: 'background .15s, transform .15s',
+        }}
+        onMouseEnter={e => {
+          const t = e.currentTarget
+          t.style.background = 'var(--teal-cta-strong)'
+          t.style.transform = 'translateY(-2px)'
+        }}
+        onMouseLeave={e => {
+          const t = e.currentTarget
+          t.style.background = 'var(--teal-cta)'
+          t.style.transform = 'translateY(0)'
+        }}
+      >
+        Solicitar primera sesión →
+      </a>
+    </div>
+  )
+}
+
+function ServiciosMobile() {
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const [active, setActive] = useState(0)
+
+  const onScroll = () => {
+    const el = scrollRef.current
+    if (!el) return
+    const step = el.clientWidth
+    setActive(Math.round(el.scrollLeft / step))
+  }
+
+  const goTo = (i: number) => {
+    const el = scrollRef.current
+    if (!el) return
+    const step = el.clientWidth
+    el.scrollTo({ left: i * step, behavior: 'smooth' })
+  }
+
+  return (
+    <section id="servicios" className="section-y" style={{ padding: '80px 0', borderBottom: '1px solid var(--border)' }}>
+      <div style={{ maxWidth: 1060, margin: '0 auto', padding: '0 32px' }}>
+        <SectionHeader />
+      </div>
+      <div
+        ref={scrollRef}
+        onScroll={onScroll}
+        style={{
+          display: 'flex',
+          overflowX: 'auto',
+          scrollSnapType: 'x mandatory',
+          paddingBottom: 8,
+          WebkitOverflowScrolling: 'touch',
+          scrollbarWidth: 'none',
+        }}
+        className="servicios-scroll"
+      >
+        {servicios.map((s, i) => (
+          <div
+            key={i}
+            style={{
+              flex: '0 0 100%',
+              scrollSnapAlign: 'center',
+              display: 'flex',
+              padding: '0 24px',
+              boxSizing: 'border-box',
+            }}
+          >
+            <ServicioCard s={s} hideIcon />
+          </div>
+        ))}
       </div>
 
-      <style>{`
-        @media (max-width: 900px) {
-          .servicios-grid { grid-template-columns: repeat(2, 1fr) !important; }
-        }
-        @media (max-width: 560px) {
-          .servicios-grid { grid-template-columns: 1fr !important; }
-        }
-      `}</style>
+      {/* Pagination dots */}
+      <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginTop: 22 }}>
+        {servicios.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => goTo(i)}
+            aria-label={`Ir al servicio ${i + 1}`}
+            style={{
+              width: i === active ? 22 : 8,
+              height: 8,
+              padding: 0,
+              border: 'none',
+              borderRadius: 999,
+              background: i === active ? 'var(--teal)' : 'var(--border)',
+              cursor: 'pointer',
+              transition: 'width .25s, background .25s',
+            }}
+          />
+        ))}
+      </div>
+
+      <div style={{ maxWidth: 1060, margin: '0 auto', padding: '0 32px' }}>
+        <motion.div {...fadeUp(0.1)} style={{ marginTop: 36 }}>
+          <CtaButton />
+        </motion.div>
+      </div>
+      <style>{`.servicios-scroll::-webkit-scrollbar { display: none; }`}</style>
     </section>
   )
 }
+
+export function Servicios() {
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const viewportRef = useRef<HTMLDivElement>(null)
+  const trackRef = useRef<HTMLDivElement>(null)
+  const [cardWidth, setCardWidth] = useState(320)
+  const [maxScroll, setMaxScroll] = useState(0)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useLayoutEffect(() => {
+    const measure = () => {
+      const mobile = window.matchMedia('(max-width: 760px)').matches
+      setIsMobile(mobile)
+      if (mobile || !viewportRef.current) {
+        setMaxScroll(0)
+        return
+      }
+      const vw = viewportRef.current.clientWidth
+      // exactly 3 cards visible at a time
+      const w = (vw - 2 * GAP) / 3
+      setCardWidth(w)
+      const trackWidth = servicios.length * w + (servicios.length - 1) * GAP
+      setMaxScroll(Math.max(0, trackWidth - vw))
+    }
+    measure()
+    const ro = new ResizeObserver(measure)
+    if (viewportRef.current) ro.observe(viewportRef.current)
+    window.addEventListener('resize', measure)
+    return () => {
+      ro.disconnect()
+      window.removeEventListener('resize', measure)
+    }
+  }, [])
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end end'],
+  })
+  const x = useTransform(scrollYProgress, [0, 1], [0, -maxScroll])
+  const progress = useTransform(scrollYProgress, [0, 1], ['33%', '100%'])
+
+  // Mobile: native horizontal swipe slider with pagination dots
+  if (isMobile) {
+    return <ServiciosMobile />
+  }
+
+  // Desktop: pinned section, cards slide horizontally on scroll
+  return (
+    <section
+      id="servicios"
+      ref={sectionRef}
+      style={{
+        position: 'relative',
+        height: `calc(100vh + ${maxScroll}px)`,
+        borderBottom: '1px solid var(--border)',
+      }}
+    >
+      <div
+        style={{
+          position: 'sticky',
+          top: 0,
+          height: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          overflow: 'hidden',
+        }}
+      >
+        <div style={{ maxWidth: 1060, margin: '0 auto', padding: '0 32px', width: '100%' }}>
+          <SectionHeader />
+
+          {/* Viewport: shows 3 cards, track slides to reveal the rest */}
+          <div ref={viewportRef} style={{ overflow: 'hidden' }}>
+            <motion.div ref={trackRef} style={{ display: 'flex', gap: GAP, x }}>
+              {servicios.map((s, i) => (
+                <ServicioCard key={i} s={s} width={cardWidth} />
+              ))}
+            </motion.div>
+          </div>
+
+          {/* Progress bar */}
+          <div style={{ height: 3, background: 'var(--border)', borderRadius: 999, margin: '24px auto 0', maxWidth: 160 }}>
+            <motion.div
+              style={{ height: '100%', width: progress, background: 'var(--teal)', borderRadius: 999 }}
+            />
+          </div>
+
+          {/* CTA — always visible below the cards */}
+          <div style={{ marginTop: 28 }}>
+            <CtaButton />
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+

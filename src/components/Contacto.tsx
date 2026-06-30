@@ -11,6 +11,8 @@ const infoItems = [
     ),
     label: 'Presencial',
     valor: 'Barcelona — zona Plaza Cataluña',
+    color: 'var(--teal)',
+    tint: 'var(--sage-tint)',
   },
   {
     icon: (
@@ -21,6 +23,8 @@ const infoItems = [
     ),
     label: 'Online',
     valor: 'Sesiones por videollamada',
+    color: 'var(--coral)',
+    tint: 'var(--coral-tint)',
   },
   {
     icon: (
@@ -30,6 +34,8 @@ const infoItems = [
     ),
     label: 'Colegiación',
     valor: 'COPC 35627',
+    color: 'var(--lilac)',
+    tint: 'var(--lilac-tint)',
   },
 ]
 
@@ -60,6 +66,7 @@ export function Contacto() {
   return (
     <section
       id="contacto"
+      className="section-y"
       style={{
         padding: '96px 0',
         background: 'var(--bg-alt)',
@@ -100,7 +107,7 @@ export function Contacto() {
                 fontFamily: 'var(--serif)',
                 fontSize: 'clamp(1.9rem, 4vw, 2.7rem)',
                 fontWeight: 430,
-                lineHeight: 1.1,
+                lineHeight: 1.18,
                 letterSpacing: '-.01em',
                 color: 'var(--teal)',
                 margin: '0 0 1.3rem',
@@ -111,6 +118,7 @@ export function Contacto() {
 
             <motion.p
               {...fadeUp(0.14)}
+              className="contacto-intro"
               style={{
                 fontSize: '1.02rem',
                 color: 'var(--ink-soft)',
@@ -127,7 +135,7 @@ export function Contacto() {
             {/* Info items */}
             <motion.div
               {...fadeUp(0.2)}
-              style={{ display: 'flex', flexDirection: 'column', gap: 14 }}
+              style={{ display: 'flex', flexDirection: 'column', gap: 18 }}
             >
               {infoItems.map((item, i) => (
                 <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
@@ -137,8 +145,8 @@ export function Contacto() {
                       width: 40,
                       height: 40,
                       borderRadius: 11,
-                      background: 'var(--sage-tint)',
-                      color: 'var(--teal)',
+                      background: item.tint,
+                      color: item.color,
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -161,7 +169,7 @@ export function Contacto() {
                     <p style={{
                       fontSize: '.95rem',
                       color: 'var(--ink)',
-                      margin: '1px 0 0',
+                      margin: '3px 0 0',
                       fontWeight: 500,
                     }}>
                       {item.valor}
@@ -205,7 +213,7 @@ export function Contacto() {
                 <h3 style={{
                   fontFamily: 'var(--serif)',
                   fontSize: '1.4rem',
-                  fontWeight: 430,
+                  fontWeight: 600,
                   color: 'var(--teal)',
                   margin: '0 0 10px',
                 }}>
@@ -335,6 +343,7 @@ export function Contacto() {
       <style>{`
         @media (max-width: 860px) {
           .contacto-layout { grid-template-columns: 1fr !important; gap: 48px !important; }
+          .contacto-intro { display: none !important; }
         }
       `}</style>
     </section>
