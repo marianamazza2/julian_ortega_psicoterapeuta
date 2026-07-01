@@ -12,7 +12,7 @@ const tabs = [
         <circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 4-6 8-6s8 2 8 6" />
       </svg>
     ),
-    title: 'Psicólogo, argentino, formado en la UBA',
+    title: 'Psicólogo, argentino - UBA',
     body: 'Soy psicólogo colegiado (COPC 35627) y me gradué en la Universidad de Buenos Aires. Acompaño a personas adultas y parejas en distintos momentos de dificultad emocional, relacional o vital, desde la escucha y el respeto por el tiempo de cada quien.',
   },
   {
@@ -152,7 +152,7 @@ function Carousel({ children, count, hint }: { children: React.ReactNode; count:
 /* ---------------------------------------- FAQ -------------------------------------- */
 
 function FaqList() {
-  const [open, setOpen] = useState(0)
+  const [open, setOpen] = useState(-1)
   return (
     <div className="faq">
       {preguntas.map((p, i) => (
@@ -249,13 +249,6 @@ export function MobileSite() {
           <a className="btn btn-primary" href="#contacto">Reservar primera sesión <span className="arr">→</span></a>
           <a className="btn btn-ghost" href="#sobre-mi">Conoce mi enfoque</a>
         </div>
-        <div className="trust reveal">
-          <span><b>COPC 35627</b> · Colegiado</span>
-          <span className="dotsep" />
-          <span>Plaza Cataluña</span>
-          <span className="dotsep" />
-          <span>Sesiones online</span>
-        </div>
       </header>
 
       {/* SOBRE MÍ */}
@@ -309,7 +302,7 @@ export function MobileSite() {
           <h2 className="h-serif reveal">En qué puedo ayudarte</h2>
         </div>
 
-        <Carousel count={servicios.length} hint={`Desliza para ver los ${servicios.length} servicios`}>
+        <Carousel count={servicios.length}>
           {servicios.map(s => (
             <article className="card" key={s.titulo}>
               <h3>{s.titulo}</h3>
@@ -357,7 +350,6 @@ export function MobileSite() {
         <p className="eyebrow terra reveal">Preguntas frecuentes</p>
         <h2 className="h-serif reveal" style={{ fontSize: 34 }}>Dudas habituales antes de comenzar</h2>
         <p className="lead reveal">Si tienes otra pregunta, puedes escribirme directamente y te responderé en breve.</p>
-        <a className="btn btn-ghost reveal" href="#contacto" style={{ marginTop: 22 }}>Escribir una consulta <span className="arr">→</span></a>
 
         <FaqList />
       </section>
@@ -370,7 +362,7 @@ export function MobileSite() {
         <div className="contact-rows reveal">
           <div className="crow">
             <span className="cicon ci-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M12 21s-7-5-7-11a7 7 0 0 1 14 0c0 6-7 11-7 11z" /><circle cx="12" cy="10" r="2.5" /></svg></span>
-            <div><p className="lbl">Presencial</p><p className="val">Barcelona — zona Plaza Cataluña</p></div>
+            <div><p className="lbl">Presencial</p><p className="val">Ronda Sant Pere 11, Piso 1-1</p></div>
           </div>
           <div className="crow">
             <span className="cicon ci-peach"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3" y="4" width="18" height="13" rx="2" /><path d="M8 21h8M12 17v4" /></svg></span>
@@ -382,7 +374,12 @@ export function MobileSite() {
           </div>
         </div>
 
-        <div className="form-card reveal">
+        <details className="form-collapse reveal">
+          <summary className="cred-toggle">
+            Formulario de contacto
+            <svg className="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 9l6 6 6-6" /></svg>
+          </summary>
+          <div className="form-card">
           {estado === 'enviado' ? (
             <div className="form-sent">
               <div className="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 6L9 17l-5-5" /></svg></div>
@@ -391,7 +388,6 @@ export function MobileSite() {
             </div>
           ) : (
             <form onSubmit={handleSubmit}>
-              <h3>Formulario de contacto</h3>
               <div className="field">
                 <label htmlFor="n">Nombre</label>
                 <input id="n" name="nombre" type="text" required placeholder="Tu nombre" />
@@ -418,7 +414,8 @@ export function MobileSite() {
               <p className="privacy">Tus datos se tratan con confidencialidad. Al enviar aceptas la <a href="#">política de privacidad</a>.</p>
             </form>
           )}
-        </div>
+          </div>
+        </details>
       </section>
 
       {/* FOOTER */}
@@ -428,10 +425,9 @@ export function MobileSite() {
         <p className="fcred">Colegiado COPC 35627</p>
       </footer>
 
-      {/* STICKY ACTION BAR */}
+      {/* WHATSAPP FLOTANTE */}
       <div className={`action-bar${showBar ? ' show' : ''}`}>
-        <a className="btn btn-primary" href="#contacto">Reservar primera sesión</a>
-        <a className="wa" href="#contacto" aria-label="Escribir una consulta">
+        <a className="wa" href="https://wa.me/34665011427?text=Hola,%20quer%C3%ADa%20hacer%20una%20consulta" target="_blank" rel="noopener noreferrer" aria-label="Escribir una consulta por WhatsApp">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 0 1 6.9 12.6l-.2.3.7 2.6-2.7-.7-.3.2A8.2 8.2 0 1 1 12 3.8zm-3 4c-.2 0-.5.1-.7.4-.3.3-.9.9-.9 2.1s.9 2.5 1.1 2.6c.1.2 1.8 2.9 4.5 3.9 2.2.9 2.7.7 3.2.7s1.6-.6 1.8-1.3c.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3l-1.6-.8c-.2-.1-.4-.1-.6.1l-.6.8c-.1.2-.3.2-.5.1s-1.1-.4-2-1.2c-.7-.6-1.2-1.4-1.3-1.6s0-.4.1-.5l.4-.5c.1-.2.1-.3.2-.5s0-.4 0-.5l-.7-1.7c-.2-.5-.4-.4-.6-.4z" /></svg>
         </a>
       </div>

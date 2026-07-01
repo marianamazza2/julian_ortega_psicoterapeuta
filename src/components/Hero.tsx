@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { TrustBar } from './TrustBar'
 
 const services = [
   { label: 'Psicoterapia individual para adultos', color: 'var(--teal)', tint: 'var(--sage-tint)' },
@@ -24,7 +25,7 @@ export function Hero() {
         background: `
           radial-gradient(ellipse 70% 60% at 95% -10%, var(--sky-tint) 0%, transparent 55%),
           radial-gradient(ellipse 55% 50% at 0% 5%,   var(--coral-tint) 0%, transparent 48%),
-          radial-gradient(ellipse 50% 55% at 50% 108%, var(--amber-tint) 0%, transparent 60%),
+          radial-gradient(ellipse 65% 60% at 108% 108%, var(--amber-tint) 0%, transparent 55%),
           var(--bg)`,
       }}
     >
@@ -283,6 +284,8 @@ export function Hero() {
           </motion.div>
           )}
         </div>
+
+        <TrustBar />
       </div>
 
       <style>{`

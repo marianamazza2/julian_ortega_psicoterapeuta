@@ -1,5 +1,5 @@
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion'
-import { useState, useRef, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 const tabs = [
   {
@@ -97,8 +97,6 @@ const fadeUp = (delay = 0) => ({
   transition: { duration: 0.55, ease: 'easeOut' as const, delay },
 })
 
-const STEP_VH = 75 // scroll length (per tab) while the section is pinned
-
 export function SobreMi() {
   const [active, setActive] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
@@ -114,9 +112,11 @@ export function SobreMi() {
     return () => mq.removeEventListener('change', update)
   }, [])
 
+  // Advance the active tab based on how far the section has scrolled through
+  // the viewport — same scroll-driven behaviour, but without pinning the section.
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start start', 'end end'],
+    offset: ['start center', 'end center'],
   })
 
   useMotionValueEvent(scrollYProgress, 'change', v => {
@@ -125,16 +125,7 @@ export function SobreMi() {
     setActive(idx)
   })
 
-  const goTo = (i: number) => {
-    const el = sectionRef.current
-    if (!el || isMobile) {
-      setActive(i)
-      return
-    }
-    const total = el.offsetHeight - window.innerHeight
-    const target = window.scrollY + el.getBoundingClientRect().top + total * ((i + 0.5) / tabs.length)
-    window.scrollTo({ top: target, behavior: 'smooth' })
-  }
+  const goTo = (i: number) => setActive(i)
 
   const inner = (
     <div style={{ maxWidth: 1060, margin: '0 auto', padding: '0 32px', width: '100%' }}>
@@ -232,7 +223,7 @@ export function SobreMi() {
               {...fadeUp(0.2)}
               style={{
                 position: 'relative',
-                minHeight: 150,
+                minHeight: 128,
                 marginBottom: '1.6rem',
               }}
             >
@@ -468,42 +459,14 @@ export function SobreMi() {
     `}</style>
   )
 
-  if (isMobile) {
-    return (
-      <section
-        id="sobre-mi"
-        ref={sectionRef}
-        className="section-y"
-        style={{ padding: '96px 0', borderBottom: '1px solid var(--border)' }}
-      >
-        {inner}
-        {responsiveStyle}
-      </section>
-    )
-  }
-
   return (
     <section
       id="sobre-mi"
       ref={sectionRef}
-      style={{
-        position: 'relative',
-        height: `calc(100vh + ${(tabs.length - 1) * STEP_VH}vh)`,
-        borderBottom: '1px solid var(--border)',
-      }}
+      className="section-y"
+      style={{ padding: '80px 0', borderBottom: '1px solid var(--border)' }}
     >
-      <div
-        style={{
-          position: 'sticky',
-          top: 0,
-          height: '100vh',
-          display: 'flex',
-          alignItems: 'center',
-          overflow: 'hidden',
-        }}
-      >
-        {inner}
-      </div>
+      {inner}
       {responsiveStyle}
     </section>
   )

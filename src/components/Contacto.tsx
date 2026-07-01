@@ -10,7 +10,7 @@ const infoItems = [
       </svg>
     ),
     label: 'Presencial',
-    valor: 'Barcelona — zona Plaza Cataluña',
+    valor: 'Ronda Sant Pere 11, Piso 1-1',
     color: 'var(--teal)',
     tint: 'var(--sage-tint)',
   },

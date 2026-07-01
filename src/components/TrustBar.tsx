@@ -74,10 +74,8 @@ export function TrustBar() {
       transition={{ duration: 0.5, delay: 0.5 }}
       className="hidden-mobile"
       style={{
-        padding: '18px 0',
-        borderTop: '1px solid var(--border)',
-        borderBottom: '1px solid var(--border)',
-        background: 'var(--bg)',
+        padding: '44px 0 0',
+        background: 'transparent',
       }}
     >
       <div style={{ maxWidth: 1060, margin: '0 auto', padding: '0 32px' }}>
