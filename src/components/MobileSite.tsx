@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { Link } from '@tanstack/react-router'
 import './mobile.css'
 
 /* ----------------------------- Data (contenido real del sitio) ---------------------------- */
@@ -318,9 +319,6 @@ export function MobileSite() {
 
       {/* ENFOQUE */}
       <section className="sec-cream" id="enfoque">
-        <a className="btn btn-primary btn-block reveal" href="#contacto" style={{ marginBottom: 38 }}>
-          Reservar primera sesión <span className="arr">→</span>
-        </a>
         <div className="sec-head">
           <p className="eyebrow terra reveal">Mi enfoque de trabajo</p>
           <h2 className="h-serif reveal">Una mirada integrativa sobre las personas y sus vínculos</h2>
@@ -411,7 +409,7 @@ export function MobileSite() {
               <button className="btn btn-primary" type="submit" disabled={estado === 'enviando'}>
                 {estado === 'enviando' ? 'Enviando…' : <>Reservar primera sesión <span className="arr">→</span></>}
               </button>
-              <p className="privacy">Tus datos se tratan con confidencialidad. Al enviar aceptas la <a href="#">política de privacidad</a>.</p>
+              <p className="privacy">Tus datos se tratan con confidencialidad. Al enviar aceptas la <Link to="/politica-de-privacidad">política de privacidad</Link>.</p>
             </form>
           )}
           </div>
@@ -422,13 +420,21 @@ export function MobileSite() {
       <footer>
         <p className="fbrand">Dr. Julián Ortega</p>
         <p>Psicoterapia · Barcelona &amp; Online</p>
+        <nav className="flegal">
+          <Link to="/aviso-legal">Aviso legal</Link>
+          <Link to="/politica-de-privacidad">Política de privacidad</Link>
+          <Link to="/politica-de-cookies">Política de cookies</Link>
+        </nav>
         <p className="fcred">Colegiado COPC 35627</p>
       </footer>
 
       {/* WHATSAPP FLOTANTE */}
       <div className={`action-bar${showBar ? ' show' : ''}`}>
-        <a className="wa" href="https://wa.me/34665011427?text=Hola,%20quer%C3%ADa%20hacer%20una%20consulta" target="_blank" rel="noopener noreferrer" aria-label="Escribir una consulta por WhatsApp">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 0 1 6.9 12.6l-.2.3.7 2.6-2.7-.7-.3.2A8.2 8.2 0 1 1 12 3.8zm-3 4c-.2 0-.5.1-.7.4-.3.3-.9.9-.9 2.1s.9 2.5 1.1 2.6c.1.2 1.8 2.9 4.5 3.9 2.2.9 2.7.7 3.2.7s1.6-.6 1.8-1.3c.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3l-1.6-.8c-.2-.1-.4-.1-.6.1l-.6.8c-.1.2-.3.2-.5.1s-1.1-.4-2-1.2c-.7-.6-1.2-1.4-1.3-1.6s0-.4.1-.5l.4-.5c.1-.2.1-.3.2-.5s0-.4 0-.5l-.7-1.7c-.2-.5-.4-.4-.6-.4z" /></svg>
+        <a className="wa-float" href="https://wa.me/34665011427?text=Hola,%20quer%C3%ADa%20hacer%20una%20consulta" target="_blank" rel="noopener noreferrer" aria-label="Escribir una consulta por WhatsApp">
+          <span className="wa-float-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 0 1 6.9 12.6l-.2.3.7 2.6-2.7-.7-.3.2A8.2 8.2 0 1 1 12 3.8zm-3 4c-.2 0-.5.1-.7.4-.3.3-.9.9-.9 2.1s.9 2.5 1.1 2.6c.1.2 1.8 2.9 4.5 3.9 2.2.9 2.7.7 3.2.7s1.6-.6 1.8-1.3c.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3l-1.6-.8c-.2-.1-.4-.1-.6.1l-.6.8c-.1.2-.3.2-.5.1s-1.1-.4-2-1.2c-.7-.6-1.2-1.4-1.3-1.6s0-.4.1-.5l.4-.5c.1-.2.1-.3.2-.5s0-.4 0-.5l-.7-1.7c-.2-.5-.4-.4-.6-.4z" /></svg>
+          </span>
+          <span className="wa-float-label">Escríbeme</span>
         </a>
       </div>
 

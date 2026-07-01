@@ -95,7 +95,7 @@
 
 /* ---------- Hero ---------- */
 .m-site .hero {
-  padding: 96px 22px 30px;
+  padding: 116px 22px 30px;
   background: linear-gradient(180deg, var(--bg) 60%, #F3EFE6);
   scroll-margin-top: 0;
 }
@@ -129,7 +129,7 @@
 
 /* ---------- Sobre mí: segmented ---------- */
 .m-site .seg {
-  display: flex; gap: 8px; margin: 24px 0 22px; background: #fff;
+  display: flex; gap: 8px; margin: 34px 0 32px; background: #fff;
   padding: 5px; border-radius: 40px; box-shadow: var(--shadow-sm);
 }
 .m-site .seg button {
@@ -166,13 +166,13 @@
 .m-site .sec-head.center { text-align: center; }
 .m-site .sec-head .h-serif { font-size: 33px; }
 .m-site .rail {
-  display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory;
+  display: flex; gap: 22px; overflow-x: auto; scroll-snap-type: x mandatory;
   margin: 0 -22px; padding: 4px 22px 6px; scroll-padding-left: 22px;
   -webkit-overflow-scrolling: touch; scrollbar-width: none;
 }
 .m-site .rail::-webkit-scrollbar { display: none; }
 .m-site .card {
-  flex: 0 0 86%; scroll-snap-align: start; background: var(--white);
+  flex: 0 0 calc(100vw - 44px); scroll-snap-align: start; background: var(--white);
   border-radius: var(--r); padding: 26px 24px 28px;
   border: 1px solid #00000008;
 }
@@ -246,9 +246,12 @@
 .m-site .form-sent p { font-size: 14.5px; color: var(--body); line-height: 1.6; margin: 0; }
 
 /* ---------- Footer ---------- */
-.m-site footer { background: var(--green-deep); color: #DCE6E1; padding: 38px 22px 120px; text-align: center; }
+.m-site footer { background: var(--green-deep); color: #DCE6E1; padding: 38px 22px 44px; text-align: center; }
 .m-site footer .fbrand { font-family: var(--serif); font-size: 24px; color: #fff; margin: 0 0 6px; }
 .m-site footer p { margin: 4px 0; font-size: 13px; opacity: .85; }
+.m-site footer .flegal { display: flex; flex-direction: column; gap: 8px; margin: 20px 0 4px; }
+.m-site footer .flegal a { color: #DCE6E1; text-decoration: none; font-size: 13px; opacity: .85; }
+.m-site footer .flegal a:active { opacity: 1; text-decoration: underline; text-underline-offset: 3px; }
 .m-site footer .fcred { font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; opacity: .6; margin-top: 14px; }
 
 /* ---------- WhatsApp flotante ---------- */
@@ -257,13 +260,11 @@
   transform: translateY(130%); transition: transform .35s cubic-bezier(.2, .8, .2, 1);
 }
 .m-site .action-bar.show { transform: translateY(0); }
-.m-site .wa {
-  width: 56px; height: 56px; border-radius: 50%; border: 1.5px solid var(--green);
-  background: #fff; color: var(--green); display: grid; place-items: center; cursor: pointer;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, .14);
-  transition: background .2s ease; text-decoration: none;
+/* Mismo diseño que el botón flotante de desktop (.wa-float en index.css);
+   solo neutralizamos el position fixed para que viva dentro de .action-bar */
+.m-site .action-bar .wa-float {
+  position: static; right: auto; bottom: auto;
 }
-.m-site .wa svg { width: 26px; height: 26px; }
 
 /* ---------- Menú overlay ---------- */
 .m-site .sheet {
@@ -272,17 +273,19 @@
 }
 .m-site .sheet.open { opacity: 1; visibility: visible; }
 .m-site .sheet-inner {
-  position: absolute; top: 0; left: 0; right: 0; background: var(--bg);
-  border-radius: 0 0 30px 30px; padding: 30px 24px 28px;
+  position: absolute; top: 0; left: 0; right: 0; height: 100vh; height: 100dvh;
+  background: var(--bg);
+  padding: 30px 24px calc(28px + env(safe-area-inset-bottom));
+  display: flex; flex-direction: column;
   transform: translateY(-100%); transition: transform .35s cubic-bezier(.2, .8, .2, 1);
 }
 .m-site .sheet.open .sheet-inner { transform: translateY(0); }
 .m-site .sheet-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
 .m-site .sheet-top .brand { font-size: 21px; }
 .m-site .x { width: 40px; height: 40px; border: 0; background: #fff; border-radius: 12px; cursor: pointer; color: var(--green-deep); font-size: 20px; box-shadow: var(--shadow-sm); }
-.m-site .sheet nav a { display: block; font-family: var(--serif); font-size: 26px; color: var(--green-deep); text-decoration: none; padding: 11px 0; border-bottom: 1px solid var(--line); }
+.m-site .sheet nav a { display: block; font-family: var(--sans); font-weight: 600; font-size: 15px; color: var(--green-deep); text-decoration: none; padding: 11px 0; border-bottom: 1px solid var(--line); }
 .m-site .sheet nav a:last-child { border-bottom: 0; }
-.m-site .sheet .btn-primary { width: 100%; margin-top: 20px; }
+.m-site .sheet .btn-primary { width: 100%; margin-top: auto; }
 
 /* ---------- Reveal ---------- */
 .m-site .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
