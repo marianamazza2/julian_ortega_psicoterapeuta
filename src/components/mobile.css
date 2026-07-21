@@ -102,6 +102,11 @@
 .m-site .hero h1 { font-size: 44px; }
 .m-site .hero h1 em { font-style: italic; color: var(--green); display: block; }
 .m-site .hero .lead { max-width: 34ch; margin-top: 28px; }
+.m-site .hero-photo {
+  margin-top: 30px; border-radius: 22px; overflow: hidden;
+  aspect-ratio: 4 / 5; box-shadow: 0 22px 50px -28px rgba(36, 53, 49, .34);
+}
+.m-site .hero-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .m-site .hero-cta { display: flex; flex-direction: column; gap: 11px; margin-top: 28px; }
 
 .m-site .btn {
@@ -183,7 +188,17 @@
 .m-site .feats li { display: flex; align-items: flex-start; gap: 11px; font-size: 14.5px; color: var(--ink); line-height: 1.35; }
 .m-site .check { flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--tint-green); display: grid; place-items: center; margin-top: 1px; }
 .m-site .check svg { width: 13px; height: 13px; color: var(--green); }
-.m-site .num { font-family: var(--serif); font-weight: 600; font-size: 40px; color: var(--green-deep); line-height: 1; margin-bottom: 14px; display: block; }
+.m-site .num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; border-radius: 13px;
+  background: var(--tint-green); color: var(--green);
+  font-family: var(--sans); font-weight: 700; font-size: 22px; line-height: 1;
+  margin-bottom: 16px;
+}
+
+/* Enfoque estático (sin carrusel): tarjetas apiladas */
+.m-site .stack { display: grid; gap: 16px; }
+.m-site .stack .card { flex: none; width: auto; }
 
 .m-site .dots { display: flex; gap: 7px; justify-content: center; margin-top: 22px; }
 .m-site .dots i { width: 8px; height: 8px; border-radius: 50%; background: #CDC8BC; transition: width .3s ease, background .3s ease; }
@@ -206,7 +221,8 @@
 
 /* ---------- Contacto ---------- */
 .m-site .contact-rows { display: grid; gap: 16px; margin: 26px 0 28px; }
-.m-site .crow { display: flex; align-items: center; gap: 14px; }
+.m-site .crow { display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit; }
+.m-site a.crow:active { opacity: .7; }
 .m-site .cicon { flex: none; width: 50px; height: 50px; border-radius: 15px; display: grid; place-items: center; }
 .m-site .cicon svg { width: 22px; height: 22px; }
 .m-site .ci-green { background: var(--tint-green); color: var(--green); }
@@ -237,6 +253,8 @@
 .m-site .field select:focus { outline: none; border-color: var(--green); background: #fff; }
 .m-site .form-card .btn-primary { width: 100%; margin-top: 6px; }
 .m-site .privacy { font-size: 11.5px; color: var(--muted); line-height: 1.5; margin: 14px 0 0; text-align: center; }
+.m-site .form-error { font-size: 12.5px; color: var(--terra); line-height: 1.5; margin: 12px 0 0; text-align: center; }
+.m-site .form-error a { color: var(--terra); }
 .m-site .privacy a { color: var(--green-soft); }
 
 .m-site .form-sent { text-align: center; padding: 14px 0 6px; }

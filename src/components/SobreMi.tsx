@@ -11,8 +11,8 @@ const tabs = [
         <path d="M5.5 21a6.5 6.5 0 0 1 13 0" />
       </svg>
     ),
-    title: 'Psicólogo, argentino, formado en la UBA',
-    body: 'Soy psicólogo colegiado (COPC 35627) y me gradué en la Universidad de Buenos Aires. Acompaño a personas adultas y parejas en distintos momentos de dificultad emocional, relacional o vital.',
+    title: 'Psicólogo, egresado de la UBA',
+    body: 'Soy psicólogo egresado de la Universidad de Buenos Aires. Acompaño a personas adultas y parejas en distintos momentos de dificultad emocional, relacional o vital.',
   },
   {
     id: 'enfoque',
@@ -24,20 +24,20 @@ const tabs = [
         <circle cx="12" cy="12" r="1" fill="currentColor" />
       </svg>
     ),
-    title: 'Una práctica clínica integrativa',
-    body: 'Integro herramientas de distintas corrientes psicológicas para ofrecer una comprensión amplia de cada situación y una intervención ajustada a las necesidades particulares de cada persona.',
+    title: 'Una mirada integral',
+    body: 'Trabajo desde un enfoque integrador, articulando distintos recursos clínicos para ofrecerte un acompañamiento ajustado a tus necesidades.',
   },
   {
     id: 'compromiso',
-    label: 'Diversidad y trabajo',
-    shortLabel: 'Trabajo',
+    label: 'Diversidad sexual',
+    shortLabel: 'Diversidad',
     icon: (
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M12 21s-7-4.5-9.5-9A5.2 5.2 0 0 1 12 6a5.2 5.2 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9Z" />
       </svg>
     ),
-    title: 'Diversidad sexual, vínculos y trabajo',
-    body: 'Mi doctorado en diversidad sexual y mi trayectoria en los estudios del trabajo me permiten abordar con especial sensibilidad la diversidad sexual y de género, la discriminación, los vínculos afectivos y el impacto del trabajo sobre la salud mental.',
+    title: 'Una clínica con perspectiva de género',
+    body: 'Mi doctorado en Psicología, centrado en diversidad sexual y trabajo, me ha llevado a profundizar en los cruces entre la identidad y el entorno social. Desde esta perspectiva, ofrezco una escucha atenta a tu singularidad frente a las demandas del contexto.',
   },
 ]
 
@@ -45,11 +45,12 @@ const credentials = [
   {
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 8v4l3 3" />
       </svg>
     ),
-    label: 'Colegiado COPC 35627',
-    sub: 'Col·legi Oficial de Psicologia de Catalunya',
+    label: 'Doctor en Psicología',
+    sub: 'Universidad de Buenos Aires',
     color: 'var(--teal)',
     tint: 'var(--sage-tint)',
   },
@@ -64,18 +65,6 @@ const credentials = [
     sub: 'Universidad de Buenos Aires (UBA)',
     color: 'var(--coral)',
     tint: 'var(--coral-tint)',
-  },
-  {
-    icon: (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <circle cx="12" cy="12" r="10" />
-        <path d="M12 8v4l3 3" />
-      </svg>
-    ),
-    label: 'Doctor en Diversidad Sexual',
-    sub: 'Investigación académica y práctica clínica',
-    color: 'var(--sky)',
-    tint: 'var(--sky-tint)',
   },
   {
     icon: (

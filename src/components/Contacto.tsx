@@ -1,7 +1,20 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 
-const infoItems = [
+// TODO: reemplazar por el email real de Julián
+const EMAIL_CONTACTO = 'hola@julianortega.com'
+
+// TODO: reemplazar TU_FORM_ID por el ID del formulario de Formspree (formspree.io)
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/TU_FORM_ID'
+
+const infoItems: {
+  icon: React.ReactNode
+  label: string
+  valor: string
+  href?: string
+  color: string
+  tint: string
+}[] = [
   {
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -10,7 +23,7 @@ const infoItems = [
       </svg>
     ),
     label: 'Presencial',
-    valor: 'Ronda Sant Pere 11, Piso 1-1',
+    valor: 'Barcelona Centro',
     color: 'var(--teal)',
     tint: 'var(--sage-tint)',
   },
@@ -29,11 +42,25 @@ const infoItems = [
   {
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
+        <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.4 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.4c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2Z" />
       </svg>
     ),
-    label: 'Colegiación',
-    valor: 'COPC 35627',
+    label: 'Teléfono',
+    valor: '+34 665 011 427',
+    href: 'tel:+34665011427',
+    color: 'var(--coral)',
+    tint: 'var(--coral-tint)',
+  },
+  {
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <rect x="2" y="4" width="20" height="16" rx="2" />
+        <path d="M2 6l10 7 10-7" />
+      </svg>
+    ),
+    label: 'Email',
+    valor: EMAIL_CONTACTO,
+    href: `mailto:${EMAIL_CONTACTO}`,
     color: 'var(--lilac)',
     tint: 'var(--lilac-tint)',
   },
@@ -59,8 +86,21 @@ export function Contacto() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setEstado('enviando')
-    await new Promise(r => setTimeout(r, 1200))
-    setEstado('enviado')
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(campos),
+      })
+      if (res.ok) {
+        setEstado('enviado')
+        setCampos({ nombre: '', email: '', mensaje: '' })
+      } else {
+        setEstado('error')
+      }
+    } catch {
+      setEstado('error')
+    }
   }
 
   return (
@@ -166,14 +206,32 @@ export function Contacto() {
                     }}>
                       {item.label}
                     </p>
-                    <p style={{
-                      fontSize: '.95rem',
-                      color: 'var(--ink)',
-                      margin: '3px 0 0',
-                      fontWeight: 500,
-                    }}>
-                      {item.valor}
-                    </p>
+                    {item.href ? (
+                      <a
+                        href={item.href}
+                        style={{
+                          fontSize: '.95rem',
+                          color: 'var(--ink)',
+                          margin: '3px 0 0',
+                          fontWeight: 500,
+                          textDecoration: 'none',
+                          display: 'block',
+                        }}
+                        onMouseEnter={e => { e.currentTarget.style.color = 'var(--teal)' }}
+                        onMouseLeave={e => { e.currentTarget.style.color = 'var(--ink)' }}
+                      >
+                        {item.valor}
+                      </a>
+                    ) : (
+                      <p style={{
+                        fontSize: '.95rem',
+                        color: 'var(--ink)',
+                        margin: '3px 0 0',
+                        fontWeight: 500,
+                      }}>
+                        {item.valor}
+                      </p>
+                    )}
                   </div>
                 </div>
               ))}
@@ -324,6 +382,19 @@ export function Contacto() {
                 >
                   {estado === 'enviando' ? 'Enviando…' : 'Enviar mensaje →'}
                 </button>
+
+                {estado === 'error' && (
+                  <p style={{
+                    fontSize: '.85rem',
+                    color: 'var(--coral)',
+                    margin: 0,
+                    textAlign: 'center',
+                    lineHeight: 1.5,
+                  }}>
+                    No se pudo enviar el mensaje. Vuelve a intentarlo o escríbeme directamente a{' '}
+                    <a href={`mailto:${EMAIL_CONTACTO}`} style={{ color: 'var(--coral)' }}>{EMAIL_CONTACTO}</a>.
+                  </p>
+                )}
 
                 <p style={{
                   fontSize: '.78rem',

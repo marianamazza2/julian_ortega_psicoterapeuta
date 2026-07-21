@@ -75,7 +75,7 @@ export function Hero() {
                 marginBottom: '1rem',
               }}
             >
-              Psicoterapia · Barcelona &amp; Online
+              Psicoterapia Online y Presencial en Barcelona
             </motion.span>
 
             <motion.h1
@@ -91,8 +91,8 @@ export function Hero() {
               }}
             >
               Un espacio para{' '}
-              <em style={{ fontStyle: 'italic', color: 'var(--teal)' }}>comprender</em>
-              <br />lo que te sucede
+              <em style={{ fontStyle: 'italic', color: 'var(--teal)' }}>ponerle palabras</em>
+              <br />a lo que te sucede
             </motion.h1>
 
             <motion.p

@@ -14,8 +14,7 @@ export function Footer() {
       <div className="site-footer-inner">
         <div className="site-footer-brand">
           <p className="site-footer-name">Dr. Julián Ortega</p>
-          <p className="site-footer-tag">Psicoterapia · Barcelona &amp; Online</p>
-          <p className="site-footer-cred">Colegiado COPC 35627</p>
+          <p className="site-footer-tag">Psicoterapia Online y Presencial en Barcelona</p>
         </div>
 
         <nav className="site-footer-nav" aria-label="Enlaces legales">

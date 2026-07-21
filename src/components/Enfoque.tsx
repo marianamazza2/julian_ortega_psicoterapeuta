@@ -3,7 +3,7 @@ import { useRef, useState } from 'react'
 
 const perspectivas = [
   {
-    numero: '01',
+    numero: '1',
     color: 'var(--teal)',
     tint: 'var(--sage-tint)',
     titulo: 'Perspectiva psicodinámica',
@@ -16,7 +16,7 @@ const perspectivas = [
     ],
   },
   {
-    numero: '02',
+    numero: '2',
     color: 'var(--coral)',
     tint: 'var(--coral-tint)',
     titulo: 'Perspectiva cognitiva',
@@ -29,7 +29,7 @@ const perspectivas = [
     ],
   },
   {
-    numero: '03',
+    numero: '3',
     color: 'var(--sky)',
     tint: 'var(--sky-tint)',
     titulo: 'Perspectiva sistémica',
@@ -125,9 +125,9 @@ export function Enfoque() {
               margin: 0,
             }}
           >
-            El sufrimiento psicológico es una experiencia compleja que no puede comprenderse
-            desde una sola perspectiva. Por eso trabajo de forma integrativa, combinando
-            distintas miradas para acercarme a cada persona en su singularidad.
+            El malestar psicológico es una experiencia compleja que no puede reducirse a una
+            sola mirada. Por eso propongo un enfoque integrador, combinando distintas
+            intervenciones para acompañar a cada persona en su singularidad.
           </motion.p>
         </div>
 
@@ -162,12 +162,18 @@ export function Enfoque() {
               {/* Número */}
               <span
                 style={{
-                  fontFamily: 'var(--serif)',
-                  fontSize: '2.2rem',
-                  fontWeight: 550,
+                  width: 46,
+                  height: 46,
+                  borderRadius: 14,
+                  background: p.tint,
                   color: p.color,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontFamily: 'var(--sans)',
+                  fontSize: '1.5rem',
+                  fontWeight: 720,
                   lineHeight: 1,
-                  letterSpacing: '-.02em',
                 }}
               >
                 {p.numero}

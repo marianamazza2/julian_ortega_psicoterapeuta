@@ -2,6 +2,12 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import './mobile.css'
 
+// TODO: reemplazar por el email real de Julián
+const EMAIL_CONTACTO = 'hola@julianortega.com'
+
+// TODO: reemplazar TU_FORM_ID por el ID del formulario de Formspree (formspree.io)
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/TU_FORM_ID'
+
 /* ----------------------------- Data (contenido real del sitio) ---------------------------- */
 
 const tabs = [
@@ -13,8 +19,8 @@ const tabs = [
         <circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 4-6 8-6s8 2 8 6" />
       </svg>
     ),
-    title: 'Psicólogo, argentino - UBA',
-    body: 'Soy psicólogo colegiado (COPC 35627) y me gradué en la Universidad de Buenos Aires. Acompaño a personas adultas y parejas en distintos momentos de dificultad emocional, relacional o vital, desde la escucha y el respeto por el tiempo de cada quien.',
+    title: 'Psicólogo, egresado de la UBA',
+    body: 'Soy psicólogo egresado de la Universidad de Buenos Aires. Acompaño a personas adultas y parejas en distintos momentos de dificultad emocional, relacional o vital.',
   },
   {
     id: 'enfoque',
@@ -24,26 +30,25 @@ const tabs = [
         <circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="4.5" /><circle cx="12" cy="12" r="1" />
       </svg>
     ),
-    title: 'Una práctica clínica integrativa',
-    body: 'Integro herramientas de distintas corrientes psicológicas para ofrecer una comprensión amplia de cada situación y una intervención ajustada a las necesidades particulares de cada persona.',
+    title: 'Una mirada integral',
+    body: 'Trabajo desde un enfoque integrador, articulando distintos recursos clínicos para ofrecerte un acompañamiento ajustado a tus necesidades.',
   },
   {
     id: 'trabajo',
-    label: 'Trabajo',
+    label: 'Diversidad',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
         <path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 11c0 5.5-7 10-7 10z" />
       </svg>
     ),
-    title: 'Diversidad sexual, vínculos y trabajo',
-    body: 'Mi doctorado en diversidad sexual y mi trayectoria en los estudios del trabajo me permiten abordar con especial sensibilidad la diversidad sexual y de género, la discriminación, los vínculos afectivos y el impacto del trabajo sobre la salud mental.',
+    title: 'Una clínica con perspectiva de género',
+    body: 'Mi doctorado en Psicología, centrado en diversidad sexual y trabajo, me ha llevado a profundizar en los cruces entre la identidad y el entorno social. Desde esta perspectiva, ofrezco una escucha atenta a tu singularidad frente a las demandas del contexto.',
   },
 ]
 
 const credentials = [
-  'Colegiado COPC nº 35627 — Col·legi Oficial de Psicologia de Catalunya',
+  'Doctor en Psicología — Universidad de Buenos Aires',
   'Graduado en Psicología — Universidad de Buenos Aires (UBA)',
-  'Doctor en Diversidad Sexual',
   'Práctica integrativa y afirmativa LGBTIQ+',
 ]
 
@@ -77,19 +82,19 @@ const servicios = [
 
 const perspectivas = [
   {
-    numero: '01',
+    numero: '1',
     titulo: 'Perspectiva psicodinámica',
     descripcion: 'Presta atención a la historia personal, las experiencias significativas y los modos de relación que cada persona ha desarrollado a lo largo de su vida.',
     items: ['Historia personal y vínculos', 'Experiencias significativas y su huella', 'Modos habituales de relacionarse'],
   },
   {
-    numero: '02',
+    numero: '2',
     titulo: 'Perspectiva cognitiva',
     descripcion: 'Examina los patrones de pensamiento, las creencias y las formas de afrontamiento que influyen en cómo cada persona vive y responde a las situaciones.',
     items: ['Patrones de pensamiento y creencias', 'Formas de afrontamiento', 'Recursos y habilidades personales'],
   },
   {
-    numero: '03',
+    numero: '3',
     titulo: 'Perspectiva sistémica',
     descripcion: 'Considera los vínculos, los contextos familiares, laborales y sociales en los que cada persona está inmersa y que dan forma a su experiencia.',
     items: ['Vínculos y dinámicas familiares', 'Contextos laborales y sociales', 'Redes de apoyo y pertenencia'],
@@ -103,7 +108,7 @@ const preguntas = [
   },
   {
     q: '¿La terapia puede realizarse online?',
-    a: 'Sí. Ofrezco sesiones tanto presenciales en Barcelona (zona Plaza Cataluña) como online. El formato online mantiene la misma calidad terapéutica y confidencialidad que la modalidad presencial.',
+    a: 'Sí. Ofrezco sesiones tanto presenciales en Barcelona como online. El formato online mantiene la misma calidad terapéutica y confidencialidad que la modalidad presencial.',
   },
   {
     q: '¿Con qué frecuencia se realizan las sesiones?',
@@ -176,7 +181,7 @@ function FaqList() {
 
 /* -------------------------------------- Site --------------------------------------- */
 
-type Estado = 'idle' | 'enviando' | 'enviado'
+type Estado = 'idle' | 'enviando' | 'enviado' | 'error'
 
 export function MobileSite() {
   const [shrunk, setShrunk] = useState(false)
@@ -221,11 +226,25 @@ export function MobileSite() {
     return () => { document.body.style.overflow = '' }
   }, [menuOpen])
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    const form = e.currentTarget
     setEstado('enviando')
-    await new Promise(r => setTimeout(r, 1200))
-    setEstado('enviado')
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: new FormData(form),
+      })
+      if (res.ok) {
+        setEstado('enviado')
+        form.reset()
+      } else {
+        setEstado('error')
+      }
+    } catch {
+      setEstado('error')
+    }
   }
 
   const closeMenu = () => setMenuOpen(false)
@@ -240,8 +259,8 @@ export function MobileSite() {
 
       {/* HERO */}
       <header className="hero" id="top" ref={heroRef}>
-        <p className="eyebrow green reveal">Psicoterapia · Barcelona &amp; Online</p>
-        <h1 className="h-serif reveal">Un espacio para <em>comprender</em> lo que te sucede</h1>
+        <p className="eyebrow green reveal">Psicoterapia Online y Presencial en Barcelona</p>
+        <h1 className="h-serif reveal">Un espacio para <em>ponerle palabras</em> a lo que te sucede</h1>
         <p className="lead reveal">
           Cuando las herramientas de siempre dejan de alcanzar, la terapia abre un lugar para
           escuchar, entender y construir nuevas formas de vivir lo que te pasa.
@@ -249,6 +268,9 @@ export function MobileSite() {
         <div className="hero-cta reveal">
           <a className="btn btn-primary" href="#contacto">Reservar primera sesión <span className="arr">→</span></a>
           <a className="btn btn-ghost" href="#sobre-mi">Conoce mi enfoque</a>
+        </div>
+        <div className="hero-photo reveal">
+          <img src="/julian-ortega.png" alt="Dr. Julián Ortega" />
         </div>
       </header>
 
@@ -323,14 +345,15 @@ export function MobileSite() {
           <p className="eyebrow terra reveal">Mi enfoque de trabajo</p>
           <h2 className="h-serif reveal">Una mirada integrativa sobre las personas y sus vínculos</h2>
           <p className="lead reveal">
-            El sufrimiento psicológico es complejo y no puede comprenderse desde una sola
-            perspectiva. Por eso combino distintas miradas para acercarme a cada persona en su singularidad.
+            El malestar psicológico es una experiencia compleja que no puede reducirse a una
+            sola mirada. Por eso propongo un enfoque integrador, combinando distintas
+            intervenciones para acompañar a cada persona en su singularidad.
           </p>
         </div>
 
-        <Carousel count={perspectivas.length}>
+        <div className="stack">
           {perspectivas.map(p => (
-            <article className="card" key={p.numero}>
+            <article className="card reveal" key={p.numero}>
               <span className="num">{p.numero}</span>
               <h3>{p.titulo}</h3>
               <p>{p.descripcion}</p>
@@ -340,7 +363,7 @@ export function MobileSite() {
               </ul>
             </article>
           ))}
-        </Carousel>
+        </div>
       </section>
 
       {/* FAQ */}
@@ -360,24 +383,24 @@ export function MobileSite() {
         <div className="contact-rows reveal">
           <div className="crow">
             <span className="cicon ci-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M12 21s-7-5-7-11a7 7 0 0 1 14 0c0 6-7 11-7 11z" /><circle cx="12" cy="10" r="2.5" /></svg></span>
-            <div><p className="lbl">Presencial</p><p className="val">Ronda Sant Pere 11, Piso 1-1</p></div>
+            <div><p className="lbl">Presencial</p><p className="val">Barcelona Centro</p></div>
           </div>
           <div className="crow">
             <span className="cicon ci-peach"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3" y="4" width="18" height="13" rx="2" /><path d="M8 21h8M12 17v4" /></svg></span>
             <div><p className="lbl">Online</p><p className="val">Sesiones por videollamada</p></div>
           </div>
-          <div className="crow">
-            <span className="cicon ci-lilac"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z" /></svg></span>
-            <div><p className="lbl">Colegiación</p><p className="val">COPC 35627</p></div>
-          </div>
+          <a className="crow" href="tel:+34665011427">
+            <span className="cicon ci-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.4 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.4c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2Z" /></svg></span>
+            <div><p className="lbl">Teléfono</p><p className="val">+34 665 011 427</p></div>
+          </a>
+          <a className="crow" href={`mailto:${EMAIL_CONTACTO}`}>
+            <span className="cicon ci-lilac"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="M2 6l10 7 10-7" /></svg></span>
+            <div><p className="lbl">Email</p><p className="val">{EMAIL_CONTACTO}</p></div>
+          </a>
         </div>
 
-        <details className="form-collapse reveal">
-          <summary className="cred-toggle">
-            Formulario de contacto
-            <svg className="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 9l6 6 6-6" /></svg>
-          </summary>
-          <div className="form-card">
+        <div className="form-card reveal">
+          <h3>Formulario de contacto</h3>
           {estado === 'enviado' ? (
             <div className="form-sent">
               <div className="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 6L9 17l-5-5" /></svg></div>
@@ -409,28 +432,31 @@ export function MobileSite() {
               <button className="btn btn-primary" type="submit" disabled={estado === 'enviando'}>
                 {estado === 'enviando' ? 'Enviando…' : <>Reservar primera sesión <span className="arr">→</span></>}
               </button>
+              {estado === 'error' && (
+                <p className="form-error">
+                  No se pudo enviar. Volvé a intentarlo o escribime a <a href={`mailto:${EMAIL_CONTACTO}`}>{EMAIL_CONTACTO}</a>.
+                </p>
+              )}
               <p className="privacy">Tus datos se tratan con confidencialidad. Al enviar aceptas la <Link to="/politica-de-privacidad">política de privacidad</Link>.</p>
             </form>
           )}
-          </div>
-        </details>
+        </div>
       </section>
 
       {/* FOOTER */}
       <footer>
         <p className="fbrand">Dr. Julián Ortega</p>
-        <p>Psicoterapia · Barcelona &amp; Online</p>
+        <p>Psicoterapia Online y Presencial en Barcelona</p>
         <nav className="flegal">
           <Link to="/aviso-legal">Aviso legal</Link>
           <Link to="/politica-de-privacidad">Política de privacidad</Link>
           <Link to="/politica-de-cookies">Política de cookies</Link>
         </nav>
-        <p className="fcred">Colegiado COPC 35627</p>
       </footer>
 
       {/* WHATSAPP FLOTANTE */}
       <div className={`action-bar${showBar ? ' show' : ''}`}>
-        <a className="wa-float" href="https://wa.me/34665011427?text=Hola,%20quer%C3%ADa%20hacer%20una%20consulta" target="_blank" rel="noopener noreferrer" aria-label="Escribir una consulta por WhatsApp">
+        <a className="wa-float" href="https://wa.me/34665011427?text=Hola%20Juli%C3%A1n.%20Quiero%20hacer%20una%20consulta%20sobre%20psicoterapia." target="_blank" rel="noopener noreferrer" aria-label="Escribir una consulta por WhatsApp">
           <span className="wa-float-icon">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 0 1 6.9 12.6l-.2.3.7 2.6-2.7-.7-.3.2A8.2 8.2 0 1 1 12 3.8zm-3 4c-.2 0-.5.1-.7.4-.3.3-.9.9-.9 2.1s.9 2.5 1.1 2.6c.1.2 1.8 2.9 4.5 3.9 2.2.9 2.7.7 3.2.7s1.6-.6 1.8-1.3c.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3l-1.6-.8c-.2-.1-.4-.1-.6.1l-.6.8c-.1.2-.3.2-.5.1s-1.1-.4-2-1.2c-.7-.6-1.2-1.4-1.3-1.6s0-.4.1-.5l.4-.5c.1-.2.1-.3.2-.5s0-.4 0-.5l-.7-1.7c-.2-.5-.4-.4-.6-.4z" /></svg>
           </span>

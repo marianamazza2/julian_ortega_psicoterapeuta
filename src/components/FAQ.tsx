@@ -10,7 +10,7 @@ const preguntas = [
   {
     pregunta: '¿La terapia puede realizarse online?',
     respuesta:
-      'Sí. Ofrezco sesiones tanto presenciales en Barcelona (zona Plaza Cataluña) como online. El formato online permite mantener la misma calidad terapéutica y confidencialidad que en la modalidad presencial, con la comodidad de conectarse desde cualquier lugar.',
+      'Sí. Ofrezco sesiones tanto presenciales en Barcelona como online. El formato online permite mantener la misma calidad terapéutica y confidencialidad que en la modalidad presencial, con la comodidad de conectarse desde cualquier lugar.',
   },
   {
     pregunta: '¿Con qué frecuencia se realizan las sesiones?',
