@@ -7,6 +7,7 @@ import { Servicios } from '../components/Servicios'
 import { Enfoque } from '../components/Enfoque'
 import { FAQ } from '../components/FAQ'
 import { Contacto } from '../components/Contacto'
+import { PhotoBand } from '../components/PhotoBand'
 import { MobileSite } from '../components/MobileSite'
 import { CookieConsent } from '../components/CookieConsent'
 import { Footer } from '../components/Footer'
@@ -49,8 +50,21 @@ function Home() {
       <Hero />
       <SobreMi />
       <Servicios />
+      <PhotoBand
+        src="/julian-escritorio.jpg"
+        alt="Julián Ortega tomando notas durante una sesión de trabajo clínico"
+        caption="Cada proceso empieza por escuchar con atención lo que traes."
+        background="var(--bg-alt)"
+      />
       <Enfoque />
       <FAQ />
+      <PhotoBand
+        src="/julian-sofa.jpg"
+        alt="Julián Ortega en su consulta, sentado en el sofá"
+        caption="Un espacio tranquilo donde poder pensar en voz alta."
+        focus="center 42%"
+        background="var(--bg-alt)"
+      />
       <Contacto />
       <Footer />
       <a

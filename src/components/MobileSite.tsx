@@ -339,6 +339,14 @@ export function MobileSite() {
         </Carousel>
       </section>
 
+      {/* FOTO — trabajo clínico */}
+      <section className="sec-cream photo-band-sec">
+        <figure className="photo-band reveal">
+          <img src="/julian-escritorio.jpg" alt="Julián Ortega tomando notas durante una sesión de trabajo clínico" loading="lazy" />
+          <figcaption>Cada proceso empieza por escuchar con atención lo que traes.</figcaption>
+        </figure>
+      </section>
+
       {/* ENFOQUE */}
       <section className="sec-cream" id="enfoque">
         <div className="sec-head">
@@ -373,6 +381,14 @@ export function MobileSite() {
         <p className="lead reveal">Si tienes otra pregunta, puedes escribirme directamente y te responderé en breve.</p>
 
         <FaqList />
+      </section>
+
+      {/* FOTO — consulta */}
+      <section className="sec-cream photo-band-sec">
+        <figure className="photo-band reveal">
+          <img src="/julian-sofa.jpg" alt="Julián Ortega en su consulta, sentado en el sofá" loading="lazy" style={{ objectPosition: 'center 42%' }} />
+          <figcaption>Un espacio tranquilo donde poder pensar en voz alta.</figcaption>
+        </figure>
       </section>
 
       {/* CONTACTO */}
