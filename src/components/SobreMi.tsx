@@ -41,7 +41,13 @@ const tabs = [
   },
 ]
 
-const credentials = [
+const credentials: {
+  icon: React.ReactNode
+  label: string
+  sub?: string
+  color: string
+  tint: string
+}[] = [
   {
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -61,10 +67,44 @@ const credentials = [
         <path d="M6 12v5c3 3 9 3 12 0v-5" />
       </svg>
     ),
+    label: 'Máster en Ciencias Sociales del Trabajo',
+    sub: 'Universidad de Buenos Aires',
+    color: 'var(--amber)',
+    tint: 'var(--amber-tint)',
+  },
+  {
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+        <path d="M6 12v5c3 3 9 3 12 0v-5" />
+      </svg>
+    ),
     label: 'Graduado en Psicología',
-    sub: 'Universidad de Buenos Aires (UBA)',
+    sub: 'Universidad de Buenos Aires',
     color: 'var(--coral)',
     tint: 'var(--coral-tint)',
+  },
+  {
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M12 21s7-4 7-9V6l-7-3-7 3v6c0 5 7 9 7 9Z" />
+        <path d="M12 8v6M9 11h6" />
+      </svg>
+    ),
+    label: 'Psicólogo general Sanitario (Homologación)',
+    color: 'var(--sky)',
+    tint: 'var(--sky-tint)',
+  },
+  {
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <circle cx="12" cy="9" r="6" />
+        <path d="M9 14.5 8 22l4-2 4 2-1-7.5" />
+      </svg>
+    ),
+    label: 'Profesional colegiado (COPC 35627)',
+    color: 'var(--teal)',
+    tint: 'var(--sage-tint)',
   },
   {
     icon: (
@@ -302,7 +342,7 @@ export function SobreMi() {
               )
 
               const list = (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
                   {credentials.map((c, i) => (
                     <div key={i} style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
                       <div style={{
@@ -329,14 +369,16 @@ export function SobreMi() {
                         }}>
                           {c.label}
                         </p>
-                        <p style={{
-                          fontSize: '.82rem',
-                          color: 'var(--ink-soft)',
-                          margin: '4px 0 0',
-                          lineHeight: 1.45,
-                        }}>
-                          {c.sub}
-                        </p>
+                        {c.sub && (
+                          <p style={{
+                            fontSize: '.82rem',
+                            color: 'var(--ink-soft)',
+                            margin: '4px 0 0',
+                            lineHeight: 1.45,
+                          }}>
+                            {c.sub}
+                          </p>
+                        )}
                       </div>
                     </div>
                   ))}

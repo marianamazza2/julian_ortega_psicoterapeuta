@@ -53,7 +53,6 @@ function Home() {
       <PhotoBand
         src="/julian-escritorio.jpg"
         alt="Julián Ortega tomando notas durante una sesión de trabajo clínico"
-        caption="Cada proceso empieza por escuchar con atención lo que traes."
         background="var(--bg-alt)"
       />
       <Enfoque />
@@ -61,7 +60,6 @@ function Home() {
       <PhotoBand
         src="/julian-sofa.jpg"
         alt="Julián Ortega en su consulta, sentado en el sofá"
-        caption="Un espacio tranquilo donde poder pensar en voz alta."
         focus="center 42%"
         background="var(--bg-alt)"
       />

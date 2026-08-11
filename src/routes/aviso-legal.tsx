@@ -20,14 +20,9 @@ function AvisoLegal() {
         <li><strong>Actividad:</strong> Psicólogo colegiado — COPC nº 35627 (Col·legi Oficial de Psicologia de Catalunya)</li>
         <li><strong>Domicilio profesional:</strong> Ronda Sant Pere 11, Piso 1-1, 08010 Barcelona</li>
         <li><strong>Teléfono:</strong> +34 665 011 427</li>
-        <li><strong>Correo electrónico:</strong> [correo@ejemplo.com]</li>
-        <li><strong>NIF:</strong> [NIF del titular]</li>
+        <li><strong>Correo electrónico:</strong> hola@julianortega.com</li>
+        <li><strong>NIF:</strong> Y7620697Y</li>
       </ul>
-      <p className="legal-note">
-        Completa los campos entre corchetes ([correo@ejemplo.com] y [NIF del titular]) con los
-        datos reales antes de publicar el sitio, ya que la LSSI-CE exige que la información
-        identificativa sea veraz y esté accesible.
-      </p>
 
       <h2>2. Objeto</h2>
       <p>

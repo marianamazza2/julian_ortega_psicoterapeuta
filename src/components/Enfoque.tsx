@@ -19,9 +19,9 @@ const perspectivas = [
     numero: '2',
     color: 'var(--coral)',
     tint: 'var(--coral-tint)',
-    titulo: 'Perspectiva cognitiva',
+    titulo: 'Teoría cognitiva',
     descripcion:
-      'Examina los patrones de pensamiento, las creencias y las formas de afrontamiento que influyen en cómo cada persona vive y responde a las situaciones.',
+      'Examina los patrones de pensamiento, las creencias y las formas de afrontamiento que influyen en cómo cada paciente vive y responde a las situaciones.',
     items: [
       'Patrones de pensamiento y creencias',
       'Formas de afrontamiento',
@@ -32,7 +32,7 @@ const perspectivas = [
     numero: '3',
     color: 'var(--sky)',
     tint: 'var(--sky-tint)',
-    titulo: 'Perspectiva sistémica',
+    titulo: 'Enfoque sistémico',
     descripcion:
       'Considera los vínculos, los contextos familiares, laborales y sociales en los que cada persona está inmersa y que dan forma a su experiencia.',
     items: [
@@ -326,7 +326,7 @@ export function Enfoque() {
             >
               La combinación de estas perspectivas me permite construir una comprensión más
               completa de cada situación y adaptar el tratamiento a las necesidades particulares
-              de cada persona, en lugar de aplicar un modelo rígido a todas las consultas.
+              de cada paciente, en lugar de aplicar un modelo rígido a todas las consultas.
             </p>
           </div>
         </motion.div>

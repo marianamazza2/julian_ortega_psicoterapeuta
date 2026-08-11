@@ -20,12 +20,8 @@ function PoliticaPrivacidad() {
         <li><strong>Responsable:</strong> Julián Ortega — Psicólogo colegiado COPC nº 35627</li>
         <li><strong>Domicilio:</strong> Ronda Sant Pere 11, Piso 1-1, 08010 Barcelona</li>
         <li><strong>Teléfono:</strong> +34 665 011 427</li>
-        <li><strong>Correo electrónico:</strong> [correo@ejemplo.com]</li>
+        <li><strong>Correo electrónico:</strong> hola@julianortega.com</li>
       </ul>
-      <p className="legal-note">
-        Sustituye [correo@ejemplo.com] por el correo real de contacto para el ejercicio de derechos
-        antes de publicar el sitio.
-      </p>
 
       <h2>2. Finalidad del tratamiento</h2>
       <p>Tratamos la información que nos facilitas con las siguientes finalidades:</p>
@@ -74,7 +70,7 @@ function PoliticaPrivacidad() {
         <li>Retirar el consentimiento prestado en cualquier momento.</li>
       </ul>
       <p>
-        Para ejercerlos, escribe a [correo@ejemplo.com] indicando el derecho que deseas ejercer.
+        Para ejercerlos, escribe a hola@julianortega.com indicando el derecho que deseas ejercer.
         Asimismo, si consideras que el tratamiento no se ajusta a la normativa, puedes presentar una
         reclamación ante la Agencia Española de Protección de Datos (<a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer">www.aepd.es</a>).
       </p>

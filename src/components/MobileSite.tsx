@@ -48,7 +48,10 @@ const tabs = [
 
 const credentials = [
   'Doctor en Psicología — Universidad de Buenos Aires',
-  'Graduado en Psicología — Universidad de Buenos Aires (UBA)',
+  'Máster en Ciencias Sociales del Trabajo — Universidad de Buenos Aires',
+  'Graduado en Psicología — Universidad de Buenos Aires',
+  'Psicólogo general Sanitario (Homologación)',
+  'Profesional colegiado (COPC 35627)',
   'Práctica integrativa y afirmativa LGBTIQ+',
 ]
 
@@ -71,7 +74,7 @@ const servicios = [
   {
     titulo: 'Orientación vocacional y laboral',
     descripcion: 'Acompañamiento en la toma de decisiones relacionadas con el estudio, la carrera y el bienestar en el trabajo.',
-    items: ['Elección de estudios y carrera', 'Redefinición del rol profesional', 'Sentido del trabajo e incertidumbre'],
+    items: ['Elección de estudios y carrera', 'Redefinición del rol profesional', 'Sentido del trabajo y satisfacción'],
   },
   {
     titulo: 'Procesos migratorios',
@@ -89,13 +92,13 @@ const perspectivas = [
   },
   {
     numero: '2',
-    titulo: 'Perspectiva cognitiva',
-    descripcion: 'Examina los patrones de pensamiento, las creencias y las formas de afrontamiento que influyen en cómo cada persona vive y responde a las situaciones.',
+    titulo: 'Teoría cognitiva',
+    descripcion: 'Examina los patrones de pensamiento, las creencias y las formas de afrontamiento que influyen en cómo cada paciente vive y responde a las situaciones.',
     items: ['Patrones de pensamiento y creencias', 'Formas de afrontamiento', 'Recursos y habilidades personales'],
   },
   {
     numero: '3',
-    titulo: 'Perspectiva sistémica',
+    titulo: 'Enfoque sistémico',
     descripcion: 'Considera los vínculos, los contextos familiares, laborales y sociales en los que cada persona está inmersa y que dan forma a su experiencia.',
     items: ['Vínculos y dinámicas familiares', 'Contextos laborales y sociales', 'Redes de apoyo y pertenencia'],
   },
@@ -112,7 +115,7 @@ const preguntas = [
   },
   {
     q: '¿Con qué frecuencia se realizan las sesiones?',
-    a: 'La frecuencia se acuerda con cada persona según sus necesidades. Habitualmente, al inicio del proceso se trabaja de forma semanal, lo que permite construir un ritmo constante y sostener el proceso.',
+    a: 'La frecuencia se acuerda con cada paciente según sus necesidades. Habitualmente, al inicio del proceso se trabaja de forma semanal, lo que permite construir un ritmo constante y sostener el proceso.',
   },
 ]
 
@@ -262,8 +265,9 @@ export function MobileSite() {
         <p className="eyebrow green reveal">Psicoterapia Online y Presencial en Barcelona</p>
         <h1 className="h-serif reveal">Un espacio para <em>ponerle palabras</em> a lo que te sucede</h1>
         <p className="lead reveal">
-          Cuando las herramientas de siempre dejan de alcanzar, la terapia abre un lugar para
-          escuchar, entender y construir nuevas formas de vivir lo que te pasa.
+          Todos atravesamos momentos en los que las herramientas que utilizamos habitualmente
+          dejan de ser suficientes. La psicoterapia ofrece un espacio de escucha y reflexión
+          donde explorar aquello que genera sufrimiento y construir nuevas formas de afrontarlo.
         </p>
         <div className="hero-cta reveal">
           <a className="btn btn-primary" href="#contacto">Reservar primera sesión <span className="arr">→</span></a>
@@ -343,7 +347,6 @@ export function MobileSite() {
       <section className="sec-cream photo-band-sec">
         <figure className="photo-band reveal">
           <img src="/julian-escritorio.jpg" alt="Julián Ortega tomando notas durante una sesión de trabajo clínico" loading="lazy" />
-          <figcaption>Cada proceso empieza por escuchar con atención lo que traes.</figcaption>
         </figure>
       </section>
 
@@ -387,7 +390,6 @@ export function MobileSite() {
       <section className="sec-cream photo-band-sec">
         <figure className="photo-band reveal">
           <img src="/julian-sofa.jpg" alt="Julián Ortega en su consulta, sentado en el sofá" loading="lazy" style={{ objectPosition: 'center 42%' }} />
-          <figcaption>Un espacio tranquilo donde poder pensar en voz alta.</figcaption>
         </figure>
       </section>
 
@@ -442,15 +444,16 @@ export function MobileSite() {
                 </select>
               </div>
               <div className="field">
-                <label htmlFor="msg">¿Qué te gustaría consultar?</label>
-                <textarea id="msg" name="mensaje" placeholder="Cuéntame brevemente qué te trae por aquí (opcional)" />
+                <label htmlFor="msg">Mensaje</label>
+                <textarea id="msg" name="mensaje" required placeholder="Cuéntame brevemente qué te trae o qué consultas tienes…" />
               </div>
               <button className="btn btn-primary" type="submit" disabled={estado === 'enviando'}>
                 {estado === 'enviando' ? 'Enviando…' : <>Reservar primera sesión <span className="arr">→</span></>}
               </button>
               {estado === 'error' && (
                 <p className="form-error">
-                  No se pudo enviar. Volvé a intentarlo o escribime a <a href={`mailto:${EMAIL_CONTACTO}`}>{EMAIL_CONTACTO}</a>.
+                  No se pudo enviar el mensaje. Vuelve a intentarlo o escríbeme directamente a{' '}
+                  <a href={`mailto:${EMAIL_CONTACTO}`}>{EMAIL_CONTACTO}</a>
                 </p>
               )}
               <p className="privacy">Tus datos se tratan con confidencialidad. Al enviar aceptas la <Link to="/politica-de-privacidad">política de privacidad</Link>.</p>
@@ -463,6 +466,7 @@ export function MobileSite() {
       <footer>
         <p className="fbrand">Dr. Julián Ortega</p>
         <p>Psicoterapia Online y Presencial en Barcelona</p>
+        <p className="fcred">Psicólogo colegiado — COPC 35627</p>
         <nav className="flegal">
           <Link to="/aviso-legal">Aviso legal</Link>
           <Link to="/politica-de-privacidad">Política de privacidad</Link>

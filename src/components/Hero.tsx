@@ -105,10 +105,10 @@ export function Hero() {
                 marginBottom: '2rem',
               }}
             >
-              Todos atravesamos momentos en los que las herramientas que hemos utilizado
-              hasta ahora dejan de ser suficientes. La psicoterapia ofrece un espacio de
+              Todos atravesamos momentos en los que las herramientas que utilizamos
+              habitualmente dejan de ser suficientes. La psicoterapia ofrece un espacio de
               escucha y reflexión donde explorar aquello que genera sufrimiento y construir
-              nuevas formas de vivirlo.
+              nuevas formas de afrontarlo.
             </motion.p>
 
             <motion.div

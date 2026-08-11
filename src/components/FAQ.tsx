@@ -15,7 +15,7 @@ const preguntas = [
   {
     pregunta: '¿Con qué frecuencia se realizan las sesiones?',
     respuesta:
-      'La frecuencia se acuerda con cada persona según sus necesidades y el tipo de trabajo que se realice. Habitualmente, al inicio del proceso se trabaja de forma semanal, lo que permite construir un ritmo constante y sostener el proceso terapéutico.',
+      'La frecuencia se acuerda con cada paciente según sus necesidades y el tipo de trabajo que se realice. Habitualmente, al inicio del proceso se trabaja de forma semanal, lo que permite construir un ritmo constante y sostener el proceso terapéutico.',
   },
 ]
 

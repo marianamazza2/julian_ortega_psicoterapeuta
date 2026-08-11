@@ -75,11 +75,17 @@ const fadeUp = (delay = 0) => ({
 
 type Estado = 'idle' | 'enviando' | 'enviado' | 'error'
 
+const MODALIDADES = ['Presencial — Barcelona', 'Online — videollamada', 'Aún no lo sé']
+
+const camposIniciales = { nombre: '', email: '', modalidad: MODALIDADES[0], mensaje: '' }
+
 export function Contacto() {
   const [estado, setEstado] = useState<Estado>('idle')
-  const [campos, setCampos] = useState({ nombre: '', email: '', mensaje: '' })
+  const [campos, setCampos] = useState(camposIniciales)
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+  ) => {
     setCampos(prev => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
@@ -94,7 +100,7 @@ export function Contacto() {
       })
       if (res.ok) {
         setEstado('enviado')
-        setCampos({ nombre: '', email: '', mensaje: '' })
+        setCampos(camposIniciales)
       } else {
         setEstado('error')
       }
@@ -332,6 +338,23 @@ export function Contacto() {
                   />
                 </div>
 
+                {/* Modalidad */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                  <label style={labelStyle}>Modalidad</label>
+                  <select
+                    name="modalidad"
+                    value={campos.modalidad}
+                    onChange={handleChange}
+                    style={selectStyle}
+                    onFocus={e => { e.currentTarget.style.borderColor = 'var(--teal)'; e.currentTarget.style.boxShadow = '0 0 0 3px var(--sage-tint)' }}
+                    onBlur={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.boxShadow = 'none' }}
+                  >
+                    {MODALIDADES.map(m => (
+                      <option key={m} value={m}>{m}</option>
+                    ))}
+                  </select>
+                </div>
+
                 {/* Mensaje */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                   <label style={labelStyle}>Mensaje</label>
@@ -392,7 +415,7 @@ export function Contacto() {
                     lineHeight: 1.5,
                   }}>
                     No se pudo enviar el mensaje. Vuelve a intentarlo o escríbeme directamente a{' '}
-                    <a href={`mailto:${EMAIL_CONTACTO}`} style={{ color: 'var(--coral)' }}>{EMAIL_CONTACTO}</a>.
+                    <a href={`mailto:${EMAIL_CONTACTO}`} style={{ color: 'var(--coral)' }}>{EMAIL_CONTACTO}</a>
                   </p>
                 )}
 
@@ -439,4 +462,16 @@ const inputStyle: React.CSSProperties = {
   outline: 'none',
   transition: 'border-color .15s, box-shadow .15s',
   width: '100%',
+}
+
+const selectStyle: React.CSSProperties = {
+  ...inputStyle,
+  appearance: 'none',
+  cursor: 'pointer',
+  paddingRight: 40,
+  backgroundImage:
+    "url(\"data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236B7B76' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E\")",
+  backgroundRepeat: 'no-repeat',
+  backgroundPosition: 'right 14px center',
+  backgroundSize: '16px 16px',
 }

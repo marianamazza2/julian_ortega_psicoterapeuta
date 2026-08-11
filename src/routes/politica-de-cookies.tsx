@@ -42,12 +42,6 @@ function PoliticaCookies() {
         consentimiento.
       </p>
 
-      <p className="legal-note">
-        Actualiza este apartado con el detalle de las cookies concretas (nombre, proveedor,
-        finalidad y duración) que finalmente instale el sitio, especialmente si incorporas
-        analítica o servicios de terceros.
-      </p>
-
       <h2>3. Gestión y desactivación de cookies</h2>
       <p>
         Al acceder por primera vez al sitio, se muestra un aviso que te permite aceptar todas las
