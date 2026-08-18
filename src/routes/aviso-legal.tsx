@@ -20,7 +20,7 @@ function AvisoLegal() {
         <li><strong>Actividad:</strong> Psicólogo colegiado — COPC nº 35627 (Col·legi Oficial de Psicologia de Catalunya)</li>
         <li><strong>Domicilio profesional:</strong> Ronda Sant Pere 11, Piso 1-1, 08010 Barcelona</li>
         <li><strong>Teléfono:</strong> +34 665 011 427</li>
-        <li><strong>Correo electrónico:</strong> hola@julianortega.com</li>
+        <li><strong>Correo electrónico:</strong> julianortega.ar@gmail.com</li>
         <li><strong>NIF:</strong> Y7620697Y</li>
       </ul>
 

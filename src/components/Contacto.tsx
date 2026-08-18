@@ -1,11 +1,9 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 
-// TODO: reemplazar por el email real de Julián
-const EMAIL_CONTACTO = 'hola@julianortega.com'
+const EMAIL_CONTACTO = 'julianortega.ar@gmail.com'
 
-// TODO: reemplazar TU_FORM_ID por el ID del formulario de Formspree (formspree.io)
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/TU_FORM_ID'
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/moeaplkb'
 
 const infoItems: {
   icon: React.ReactNode

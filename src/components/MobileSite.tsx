@@ -2,11 +2,9 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import './mobile.css'
 
-// TODO: reemplazar por el email real de Julián
-const EMAIL_CONTACTO = 'hola@julianortega.com'
+const EMAIL_CONTACTO = 'julianortega.ar@gmail.com'
 
-// TODO: reemplazar TU_FORM_ID por el ID del formulario de Formspree (formspree.io)
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/TU_FORM_ID'
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/moeaplkb'
 
 /* ----------------------------- Data (contenido real del sitio) ---------------------------- */
 
@@ -368,9 +366,9 @@ export function MobileSite() {
           </p>
         </div>
 
-        <div className="stack">
+        <Carousel count={perspectivas.length}>
           {perspectivas.map(p => (
-            <article className="card reveal" key={p.numero}>
+            <article className="card" key={p.numero}>
               <span className="num">{p.numero}</span>
               <h3>{p.titulo}</h3>
               <p>{p.descripcion}</p>
@@ -380,7 +378,7 @@ export function MobileSite() {
               </ul>
             </article>
           ))}
-        </div>
+        </Carousel>
       </section>
 
       {/* FAQ */}

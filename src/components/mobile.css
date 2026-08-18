@@ -206,10 +206,6 @@
   margin-bottom: 16px;
 }
 
-/* Enfoque estático (sin carrusel): tarjetas apiladas */
-.m-site .stack { display: grid; gap: 16px; }
-.m-site .stack .card { flex: none; width: auto; }
-
 .m-site .dots { display: flex; gap: 7px; justify-content: center; margin-top: 22px; }
 .m-site .dots i { width: 8px; height: 8px; border-radius: 50%; background: #CDC8BC; transition: width .3s ease, background .3s ease; }
 .m-site .dots i.on { width: 24px; border-radius: 5px; background: var(--green); }
