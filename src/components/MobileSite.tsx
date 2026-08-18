@@ -46,11 +46,17 @@ const tabs = [
   },
 ]
 
+const modalidades = [
+  'Presencial — Barcelona',
+  'Online — videollamada',
+  'Aún no lo sé',
+]
+
 const credentials = [
   'Doctor en Psicología — Universidad de Buenos Aires',
   'Máster en Ciencias Sociales del Trabajo — Universidad de Buenos Aires',
   'Graduado en Psicología — Universidad de Buenos Aires',
-  'Psicólogo general Sanitario (Homologación)',
+  'Psicólogo general sanitario (Homologación)',
   'Profesional colegiado (COPC 35627)',
   'Práctica integrativa y afirmativa LGBTIQ+',
 ]
@@ -115,7 +121,7 @@ const preguntas = [
   },
   {
     q: '¿Con qué frecuencia se realizan las sesiones?',
-    a: 'La frecuencia se acuerda con cada paciente según sus necesidades. Habitualmente, al inicio del proceso se trabaja de forma semanal, lo que permite construir un ritmo constante y sostener el proceso.',
+    a: 'La frecuencia se acuerda con cada paciente según sus necesidades. Habitualmente, al inicio se trabaja de forma semanal, lo que permite construir un ritmo constante y sostener el proceso.',
   },
 ]
 
@@ -436,12 +442,16 @@ export function MobileSite() {
                 <input id="e" name="email" type="email" required placeholder="tu@correo.com" />
               </div>
               <div className="field">
-                <label htmlFor="m">Modalidad</label>
-                <select id="m" name="modalidad" defaultValue="Presencial — Barcelona">
-                  <option>Presencial — Barcelona</option>
-                  <option>Online — videollamada</option>
-                  <option>Aún no lo sé</option>
-                </select>
+                <span className="glabel" id="lbl-modalidad">Modalidad</span>
+                <div className="mopts" role="radiogroup" aria-labelledby="lbl-modalidad">
+                  {modalidades.map((m, i) => (
+                    <label className="mopt" key={m}>
+                      <input type="radio" name="modalidad" value={m} defaultChecked={i === 0} />
+                      <span className="dot" aria-hidden="true" />
+                      <span className="txt">{m}</span>
+                    </label>
+                  ))}
+                </div>
               </div>
               <div className="field">
                 <label htmlFor="msg">Mensaje</label>

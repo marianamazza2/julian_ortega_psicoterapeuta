@@ -247,7 +247,8 @@
 .m-site .form-card { background: var(--white); border-radius: var(--r); box-shadow: var(--shadow); padding: 26px 22px 24px; }
 .m-site .form-card h3 { font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--green-soft); margin: 0 0 20px; }
 .m-site .field { margin-bottom: 16px; }
-.m-site .field label { display: block; font-size: 13.5px; font-weight: 600; color: var(--ink); margin-bottom: 7px; }
+.m-site .field label,
+.m-site .field .glabel { display: block; font-size: 13.5px; font-weight: 600; color: var(--ink); margin-bottom: 7px; }
 .m-site .field input,
 .m-site .field textarea,
 .m-site .field select {
@@ -261,6 +262,33 @@
 .m-site .field input:focus,
 .m-site .field textarea:focus,
 .m-site .field select:focus { outline: none; border-color: var(--green); background: #fff; }
+/* Modalidad: opciones a la vista (evita el selector nativo de Android) */
+.m-site .mopts { display: grid; gap: 8px; }
+.m-site .field .mopt {
+  display: flex; align-items: center; gap: 11px; margin: 0;
+  font-size: 15px; font-weight: 500; color: var(--ink);
+  background: var(--bg); border: 1.5px solid transparent; border-radius: 13px;
+  padding: 13px 15px; cursor: pointer;
+  transition: border .2s ease, background .2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.m-site .mopt input { position: absolute; opacity: 0; pointer-events: none; }
+.m-site .mopt .dot {
+  flex: none; width: 19px; height: 19px; border-radius: 999px;
+  border: 1.5px solid #C3C7BF; background: #fff;
+  display: grid; place-items: center;
+  transition: border-color .2s ease;
+}
+.m-site .mopt .dot::after {
+  content: ''; width: 9px; height: 9px; border-radius: 999px;
+  background: var(--green); transform: scale(0);
+  transition: transform .18s ease;
+}
+.m-site .mopt:has(input:checked) { background: var(--tint-green); border-color: var(--green); }
+.m-site .mopt:has(input:checked) .dot { border-color: var(--green); }
+.m-site .mopt input:checked + .dot::after { transform: scale(1); }
+.m-site .mopt:has(input:focus-visible) { border-color: var(--green); }
+
 .m-site .form-card .btn-primary { width: 100%; margin-top: 6px; }
 .m-site .privacy { font-size: 11.5px; color: var(--muted); line-height: 1.5; margin: 14px 0 0; text-align: center; }
 .m-site .form-error { font-size: 12.5px; color: var(--terra); line-height: 1.5; margin: 12px 0 0; text-align: center; }

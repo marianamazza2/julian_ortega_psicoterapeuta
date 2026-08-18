@@ -91,7 +91,7 @@ const credentials: {
         <path d="M12 8v6M9 11h6" />
       </svg>
     ),
-    label: 'Psicólogo general Sanitario (Homologación)',
+    label: 'Psicólogo general sanitario (Homologación)',
     color: 'var(--sky)',
     tint: 'var(--sky-tint)',
   },
